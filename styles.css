@@ -1,0 +1,331 @@
+/*Positioning throughout is absolute*/
+
+body {
+  font-family: sans-serif;
+  text-align: center;
+  color: #121212;
+}
+
+#title {
+  position: absolute;
+  top: 0;
+  left: 275px;
+  margin: 0 auto;
+}
+
+.console-info {
+  position: absolute;
+  height: 60px;
+  box-sizing: border-box;
+  width: 200px;
+  border: 2px solid black;
+  text-align: center;
+}
+
+/*************************************/
+/*From somewhere, these boxes are inheriting a margin of 16
+and it is screwing up how the text looks*/
+
+#player1 {
+  background-color: #448888;
+  top: 80px;
+  left: 30px;
+}
+
+ #die {
+   background-color: white;
+   top: 80px;
+   left: 347.5px;
+ }
+
+ #player2 {
+   background-color: #b1d46a;
+   top: 80px;
+   left: 670px;
+ }
+
+ /*************************************/
+
+
+  #establishments {
+   position: absolute;
+   top: 170px;
+   left: 290px;
+   margin: 0 auto;
+ }
+
+ #establishments-instrux {
+   position: absolute;
+   top: 205px;
+   left: 150px;
+   margin: 0 auto;
+ }
+
+#destinations {
+   position: absolute;
+   top: 425px;
+   left: 310px;
+   margin: 0 auto;
+ }
+
+ #destinations-instrux {
+   position: absolute;
+   top: 460px;
+   left: 235px;
+   margin: 0 auto;
+ }
+
+h1 {
+  font-family: 'Sigmar One', cursive;
+  letter-spacing: .3em;
+}
+
+h2 {
+  font-family: 'Sigmar One', cursive;
+  letter-spacing: .1em;
+}
+
+h3 {
+  font-family: 'Sigmar One', cursive;
+  font-size: 16px;
+  padding: 0;
+}
+
+p {
+  font-size: 13px;
+}
+
+p.num {
+  font-size: 13px;
+  font-weight: bolder;
+}
+
+
+/*Style the front row of cards*/
+
+.card {
+  box-sizing: border-box;
+  height: 140px;
+  width: 100px;
+  border: 2px solid #121212;
+  background-color: #e37171;
+  position: absolute;
+  padding: 5px;
+  margin: 20px 20px 0 20px;
+}
+
+/*Position the top row of destination cards*/
+
+#est1a {
+  left: 30px;
+  top: 220px
+}
+
+#est2a {
+  left: 175px;
+  top: 220px
+}
+
+#est3a {
+  left: 320px;
+  top: 220px
+}
+
+#est4a {
+  left: 465px;
+  top: 220px
+}
+
+#est5a {
+  left: 610px;
+  top: 220px
+}
+
+#est6a {
+  left: 755px;
+  top: 220px
+}
+
+/*Position the top row of destination cards*/
+
+#dest1a {
+  left: 30px;
+  top: 475px
+}
+
+#dest2a {
+  left: 175px;
+  top: 475px
+}
+
+#dest3a {
+  left: 320px;
+  top: 475px
+}
+
+#dest4a {
+  left: 465px;
+  top: 475px
+}
+
+#dest5a {
+  left: 610px;
+  top: 475px
+}
+
+#dest6a {
+  left: 755px;
+  top: 475px
+}
+
+
+/*Style the back rows of cards*/
+.card-behind {
+  box-sizing: border-box;
+  height: 140px;
+  width: 100px;
+  border: 2px solid #121212;
+  background-color: #bb4242;
+  margin: 20px 20px 0 20px;
+  z-index: -1;
+  position: absolute;
+}
+
+
+/*Position the back row of establishment cards*/
+#est1b {
+  left: 10px;
+  top: 205px
+}
+
+#est2b {
+  left: 155px;
+  top: 205px
+}
+
+#est3b {
+  left: 300px;
+  top: 205px
+}
+
+#est4b {
+  left: 445px;
+  top: 205px
+}
+
+#est5b {
+  left: 590px;
+  top: 205px
+}
+
+#est6b {
+  left: 735px;
+  top: 205px
+}
+
+/*Position the back row of destination cards*/
+#dest1b {
+  left: 10px;
+    top: 460px
+}
+
+#dest2b {
+  left: 155px;
+  top: 460px
+}
+
+#dest3b {
+  left: 300px;
+  top: 460px
+}
+
+#dest4b {
+  left: 445px;
+  top: 460px
+}
+
+#dest5b {
+  left: 590px;
+  top: 460px
+}
+
+#dest6b {
+  left: 735px;
+  top: 460px
+}
+
+/*Style the info cards*/
+
+.info-card {
+  box-sizing: border-box;
+  height: 40px;
+  width: 100px;
+  position: absolute;
+  /*padding: 5px;*/
+  margin: 0 20px;
+}
+
+/*Position the info boxes beneath the destination cards*/
+
+#iest1 {
+  left: 30px;
+  top: 370px
+}
+
+#iest2 {
+  left: 175px;
+  top: 370px
+}
+
+#iest3 {
+  left: 320px;
+  top: 370px
+}
+
+#iest4 {
+  left: 465px;
+  top: 370px
+}
+
+#iest5 {
+  left: 610px;
+  top: 370px
+}
+
+#iest6 {
+  left: 755px;
+  top: 370px
+}
+
+
+/*Position the info boxes beneath the destination cards*/
+
+#idest1 {
+  left: 30px;
+  top: 625px
+}
+
+#idest2 {
+  left: 175px;
+  top: 625px
+}
+
+#idest3 {
+  left: 320px;
+  top: 625px
+}
+
+#idest4 {
+  left: 465px;
+  top: 625px
+}
+
+#idest5 {
+  left: 610px;
+  top: 625px
+}
+
+#idest6 {
+  left: 755px;
+  top: 625px
+}

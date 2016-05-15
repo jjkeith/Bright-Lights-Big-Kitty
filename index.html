@@ -2,10 +2,12 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <link href='https://fonts.googleapis.com/css?family=Montserrat'
-          rel='stylesheet' type='text/css'>
+
+    <link href='https://fonts.googleapis.com/css?family=Sigmar+One'
+      rel='stylesheet' type='text/css'>
+
         <link rel = "stylesheet"
-          href="/Users/JJ/GA_Workspace/w01/TicTacToe/styles.css"></styles>
+          href="/Users/JJ/GA_Workspace/Project1/styles.css"></styles>
       <script src="https://code.jquery.com/jquery-1.12.3.min.js"
           integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ="
           crossorigin="anonymous"></script>
@@ -15,9 +17,104 @@
   </head>
   <body>
 
+<div id = 'title'><h1>Hairballerz</h1></div>
+
+<!-- begin console -->
+<div class = 'console-info' id = 'player1'><h3>Player 1</h3>
+  <h4>ξ[balance]</h4></div>
+<div class = 'console-info' id = 'die'><h3>⚀ ⚁ ⚂ ⚃ ⚄ ⚅</h3></div>
+<div class = 'console-info' id = 'player2'><h3>Player 2</h3>
+  <h4>ξ[balance]</h4></div>
 
 
+<!-- begin first row of cards -->
+<div class = 'row'>
 
+<h2 id = 'establishments'> Cat Establishments</h2>
+<h4 id = 'establishments-instrux'>Players may only purchase the establishment
+  that corresponds with their roll.</h4>
+
+<!-- The top cards -->
+<div class = 'card' id = 'est1a'><p class=num>①</p>
+  <p>The Veterinary Offices of Katz & Nuzzle<br /><strong>ξ1</strong></div>
+
+<div class = 'card' id = 'est2a'><p class=num>②</p>
+  <p>Tuna 'R' Us<br /><strong>ξ2</strong></div>
+
+<div class = 'card' id = 'est3a'><p class=num>③</p>
+  <p>Purrfect Coif Groomer<br /><strong>ξ3</strong></div>
+
+<div class = 'card' id = 'est4a'><p class=num>④</p>
+  <p>Clawsitive Reinforcement Training Academy<br /><strong>ξ4</strong></div>
+
+<div class = 'card' id = 'est5a'><p class=num>⑤</p>
+  <p>Pawsplay Costume Rentals<br /><strong>ξ5</strong></div>
+
+<div class = 'card' id = 'est6a'><p class=num>⑥</p>
+  <p>Flea Strasburg Acting School<br /><strong>ξ2</strong></p></div>
+
+<!-- The backrow of cards -->
+<div class = 'card-behind' id = 'est1b'><p></div>
+<div class = 'card-behind' id = 'est2b'><p></div>
+<div class = 'card-behind' id = 'est3b'><p></div>
+<div class = 'card-behind' id = 'est4b'><p></div>
+<div class = 'card-behind' id = 'est5b'><p></div>
+<div class = 'card-behind' id = 'est6b'><p></div>
+
+<!-- Info beneath each card -->
+<div class = 'info-card' id = 'iest1'><p>Earns ξ1 on roll of ⚀</p></div>
+<div class = 'info-card' id = 'iest2'><p>Earns ξ2 on roll of ⚁</p></div>
+<div class = 'info-card' id = 'iest3'><p>Earns ξ3 on roll of ⚂</p></div>
+<div class = 'info-card' id = 'iest4'><p>Earns ξ4 on roll of ⚃</p></div>
+<div class = 'info-card' id = 'iest5'><p>Earns ξ5 on roll of ⚄</p></div>
+<div class = 'info-card' id = 'iest6'><p>Earns ξ6 on roll of ⚅</p></div>
+
+</div>
+
+<!-- begin second row of cards -->
+<div class = 'row'>
+
+<h2 id = 'destinations'> Cat Destinations</h2>
+<h4 id = 'destinations-instrux'>Must buy in order.
+  Get WCAT Television Station to win!</h4>
+
+<!-- Top cards start here -->
+<div class = 'card' id = 'dest1a'><p class=num>①</p>
+  <p>Catnip Dispensary<br /><strong>ξ10</strong></p></div>
+
+<div class = 'card' id = 'dest2a'><p class=num>②</p>
+  <p>Tuna Cannery<br /><strong>ξ15</strong></p></div>
+
+<div class = 'card' id = 'dest3a'><p class=num>③</p>
+  <p>Catapult Magazine Headquarters<br /><strong>ξ20</strong></p></div>
+
+<div class = 'card' id = 'dest4a'><p class=num>④</p>
+  <p>Paw-trait Studio<br /><strong>ξ25</strong></p></div>
+
+<div class = 'card' id = 'dest5a'><p class=num>⑤</p>
+  <p>CatCon Venue<br /><strong>ξ30</strong></p></div>
+
+<div class = 'card' id = 'dest6a'><p class=num>⑥</p>
+  <p>WCAT Television Station<br /><strong>ξ35</strong></p></div>
+
+<!-- The backrow of cards -->
+<div class = 'card-behind' id = 'dest1b'><p></div>
+<div class = 'card-behind' id = 'dest2b'><p></div>
+<div class = 'card-behind' id = 'dest3b'><p></div>
+<div class = 'card-behind' id = 'dest4b'><p></div>
+<div class = 'card-behind' id = 'dest5b'><p></div>
+<div class = 'card-behind' id = 'dest6b'><p></div>
+
+<!-- Info cards beneath each card -->
+<div class = 'info-card' id = 'idest1'><p>Earns + ξ1 on ①</p></div>
+<div class = 'info-card' id = 'idest2'><p>Earns + ξ1 on ②</p></div>
+<div class = 'info-card' id = 'idest3'><p>Earns + ξ1 on ③</p></div>
+<div class = 'info-card' id = 'idest4'><p>Earns + ξ1 on ④</p></div>
+<div class = 'info-card' id = 'idest5'><p>Earns + ξ1 on ⑤</p></div>
+<div class = 'info-card' id = 'idest6'><p><strong>Buy to win!</strong></p></div>
+
+
+</div>
   <script src="/Users/JJ/GA_Workspace/Project1/app.js" charset="utf-8"></script>
   </body>
 </html>
