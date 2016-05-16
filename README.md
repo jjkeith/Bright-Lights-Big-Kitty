@@ -1,6 +1,7 @@
 #Hairballerz
-[include link to finished game]
-The goal is make some cat cash (ξ) by building establishments early in the game. As players accrue cash, they can start investing in destination properties that will help them make more money on their establishments. In order to win, player must buy all the destinations in order until they get the WCAT Television Studio and win the game.
+* [include link to finished game] 
+
+The goal is earn enough money on establishments to buy the WCAT Television Station.
 
 ####Inspiration
 After playing Machi Koro, a Japanese card game where players act as mayors and invest in infrastructure, my  seven-year-old daughter wanted to create a similar game, but with her favorite animal: cats. 
@@ -40,10 +41,12 @@ My original plan for laying out the screen was to put player info at the bottom 
 5. CatCon Venue- Costs 30ξ, earns 1ξ extra on Pawsplay Costume Rentals
 6. WCAT Television Station - Costs 35ξ
 
+
 #####On Each Roll
 1. Both players collect rent on any cards held.
 2. The active player can choose to buy whatever he or she can afford.
 3. Whoever buys the WCAT Television Studio first, wins!
+
 
 ###Technology
 Hairballerz was created with HTML, CSS, Javascript and jQuery. 
@@ -52,11 +55,10 @@ Hairballerz was created with HTML, CSS, Javascript and jQuery.
 * Rules and theme: Beatrix Keith
 * Inspiration: Machi Koro © IDW Games, 2015
 
+
 ##Future Plans
 ####Starter cards
 ######four cards total; chosen at random
->Note that I should start building this with just one card and everyone collects rent on every turn
-
 1. Cat Rescue - odds
 2. Cat Breeder - evens
 
