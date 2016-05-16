@@ -1,4 +1,5 @@
 #Hairballerz
+[include link to finished game]
 The goal is make some cat cash (ξ) by building establishments early in the game. As players accrue cash, they can start investing in destination properties that will help them make more money on their establishments. In order to win, player must buy all the destinations in order until they get the WCAT Television Studio and win the game.
 
 ####Inspiration
@@ -11,9 +12,7 @@ Together, we created new rules for gameplay that both simplified the game for yo
 My original plan for laying out the screen was to put player info at the bottom of the page as below. However, I switched it around because I felt that having that information at the top was more intuitive. 
 
 ![](Wireframe.png)
-
-###Game Requirements
-
+[image will appear once game is uploaded]
 
 ###Instructions
 
@@ -41,12 +40,10 @@ My original plan for laying out the screen was to put player info at the bottom 
 5. CatCon Venue- Costs 30ξ, earns 1ξ extra on Pawsplay Costume Rentals
 6. WCAT Television Station - Costs 35ξ
 
-
 #####On Each Roll
 1. Both players collect rent on any cards held.
 2. The active player can choose to buy whatever he or she can afford.
 3. Whoever buys the WCAT Television Studio first, wins!
-
 
 ###Technology
 Hairballerz was created with HTML, CSS, Javascript and jQuery. 
@@ -54,7 +51,6 @@ Hairballerz was created with HTML, CSS, Javascript and jQuery.
 ###Credits
 * Rules and theme: Beatrix Keith
 * Inspiration: Machi Koro © IDW Games, 2015
-
 
 ##Future Plans
 ####Starter cards
