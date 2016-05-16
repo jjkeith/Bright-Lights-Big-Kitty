@@ -44,6 +44,14 @@ and it is screwing up how the text looks*/
    left: 670px;
  }
 
+ #start {
+   float: left;
+ }
+
+ #reset {
+   float: right;
+ }
+
  /*************************************/
 
 

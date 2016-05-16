@@ -1,7 +1,24 @@
-#Hairballerz####Starter cards######four cards total; chosen at random
->Note that I should start building this with just one card and everyone collects rent on every turn
-1. Cat Rescue - odds2. Cat Breeder - evens####Cat Destinations* Can have up to four (or two?) of each
+#Hairballerz
+The goal is make some cat cash (ξ) by building establishments early in the game. As players accrue cash, they can start investing in destination properties that will help them make more money on their establishments. In order to win, player must buy all the destinations in order until they get the WCAT Television Studio and win the game.####Inspiration
+After playing Machi Koro, a Japanese card game where players act as mayors and invest in infrastructure, my  seven-year-old daughter wanted to create a similar game, but with her favorite animal: cats. 
 
->Note that I need to begin with one destination per person. * Can only buy when you roll that number
-* When a player obtains a destination, the card changes to the player's color.1. The Veterinary Offices of Katz & Nuzzle - Costs 1 and earns 1 when a 1 is rolled.2. Tuna 'R' Us - Costs 2 and earns 2 when a 2 is rolled3. Purrfect Coif Groomer - Costs 3 and earns 3 when a 3 is rolled4. Clawsitive Reinforcement Training Academy - Costs 4 and earns 4 when a 4 is rolled5. Pawsplay Costume Rentals — Costs 5 and earns 5 when a 5 is rolled6. Flea Strasburg Acting School - Costs 6 and earns 6 when a 6 is rolled####Cat Developments* Can only have one of each* They have to be bought in order
-* * When a player obtains a development, the card changes to the player's color.1. Catnip Dispensary - Costs 10, earns 1 extra on The Veterinary Offices of Katz & Nuzzle 2. Tuna Cannery - Costs 15, earns 1 extra on the Tuna 'R' Us3. Catapult Magazine Headquarters - Costs 20, earns 1 extra on Purrfect Coif Groomer4. Paw-trait Studio - Costs 25, earns 1 extra on Clawsitive Reinforcement Training Academy5. CatCon Venue- Costs 30, earns 1 extra on Pawsplay Costume Rentals6. WCAT Television Station - Costs 35####Example of Layout (Kind of)![](http://www.clubfantasci.com/wp-content/uploads/2015/12/MACHIKORO6.jpg)####Functionality1. Create a die2. Distribute a starter card to each player at random3. Create bank accounts for player and computer4. Build an array of cards for player and computer5. Player rolls and makes decisions6. Computer rolls and makes decisions7. Whoever buys the WCAT first wins.####On Each Roll1. Both players collect rent on any cards held2. The active player can choose to buy whatever he or she can afford####Computer DecisionsProbably default to the computer buying any property it can afford. 
+Together, we created new rules for gameplay that both simplified the game for younger players and sped up game play. She turned in a paper version of the game for a school project (then named "Cat Race to the Fashion Show") and I set about making a web-based version with a new title and some new cards. ####Methods
+
+My original plan for laying out the screen was to put player info at the bottom of the page as below. However, I switched it around because I felt that having that information at the top was more intuitive. 
+
+![](Wireframe.png)###Game Requirements
+
+
+###Instructions#####Cat Establishments* Can have up to two of each
+* Can only buy when you roll that number
+* When a player obtains a destination, the card changes to the player's color.1. The Veterinary Offices of Katz & Nuzzle - Costs 1ξ and earns 1ξ when a 1 is rolled.2. Tuna 'R' Us — Costs 2ξ and earns 2ξ when a 2 is rolled3. Purrfect Coif Groomer — Costs 3ξ and earns 3ξ when a 3 is rolled4. Clawsitive Reinforcement Training Academy — Costs 4ξ and earns 4ξ when a 4 is rolled5. Pawsplay Costume Rentals — Costs 5ξ and earns 5ξ when a 5 is rolled6. Flea Strasburg Acting School — Costs 6ξ and earns 6ξ when a 6 is rolled#####Cat Destinations* Can only have one of each* They have to be bought in order
+* * When a player obtains a development, the card changes to the player's color.1. Catnip Dispensary - Costs 10ξ, earns 1ξ extra on The Veterinary Offices of Katz & Nuzzle 2. Tuna Cannery - Costs 15ξ, earns 1ξ extra on the Tuna 'R' Us3. Catapult Magazine Headquarters - Costs 20ξ, earns 1ξ extra on Purrfect Coif Groomer4. Paw-trait Studio - Costs 25ξ, earns 1ξ extra on Clawsitive Reinforcement Training Academy5. CatCon Venue- Costs 30ξ, earns 1ξ extra on Pawsplay Costume Rentals6. WCAT Television Station - Costs 35ξ#####On Each Roll1. Both players collect rent on any cards held.2. The active player can choose to buy whatever he or she can afford.
+3. Whoever buys the WCAT Television Studio first, wins!###Technology
+Hairballerz was created with HTML, CSS, Javascript and jQuery. 
+
+###Credits
+* Rules and theme: Beatrix Keith
+* Inspiration: Machi Koro © IDW Games, 2015##Future Plans
+####Starter cards######four cards total; chosen at random
+>Note that I should start building this with just one card and everyone collects rent on every turn
+1. Cat Rescue - odds2. Cat Breeder - evens####Computer DecisionsProbably default to the computer buying any property it can afford. 
