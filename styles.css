@@ -28,6 +28,7 @@ and it is screwing up how the text looks*/
 
 #player1 {
   background-color: #448888;
+  /*remember that if you change the color you have to change the color property in js*/
   top: 80px;
   left: 30px;
 }
@@ -40,6 +41,7 @@ and it is screwing up how the text looks*/
 
  #player2 {
    background-color: #b1d46a;
+   /*remember that if you change the color you have to change the color property in js*/
    top: 80px;
    left: 670px;
  }
@@ -50,6 +52,14 @@ and it is screwing up how the text looks*/
 
  #reset {
    float: right;
+ }
+
+ button {
+
+ }
+
+ a {
+   color: black;
  }
 
  /*************************************/
@@ -122,66 +132,70 @@ p.num {
   margin: 20px 20px 0 20px;
 }
 
+.purchased {
+
+}
+
 /*Position the top row of destination cards*/
 
-#est1a {
+#estA1 {
   left: 30px;
   top: 220px
 }
 
-#est2a {
+#estA2 {
   left: 175px;
   top: 220px
 }
 
-#est3a {
+#estA3 {
   left: 320px;
   top: 220px
 }
 
-#est4a {
+#estA4 {
   left: 465px;
   top: 220px
 }
 
-#est5a {
+#estA5 {
   left: 610px;
   top: 220px
 }
 
-#est6a {
+#estA6 {
   left: 755px;
   top: 220px
 }
 
 /*Position the top row of destination cards*/
 
-#dest1a {
+#destA1 {
   left: 30px;
   top: 475px
 }
 
-#dest2a {
+#destA2 {
   left: 175px;
   top: 475px
 }
 
-#dest3a {
+#destA3 {
   left: 320px;
   top: 475px
 }
 
-#dest4a {
+#destA4 {
   left: 465px;
   top: 475px
 }
 
-#dest5a {
+#destA5 {
   left: 610px;
   top: 475px
 }
 
-#dest6a {
+#destA6 {
   left: 755px;
   top: 475px
 }
@@ -199,65 +213,64 @@ p.num {
   position: absolute;
 }
 
-
 /*Position the back row of establishment cards*/
-#est1b {
+#estB1 {
   left: 10px;
   top: 205px
 }
 
-#est2b {
+#estB2 {
   left: 155px;
   top: 205px
 }
 
-#est3b {
+#estB3 {
   left: 300px;
   top: 205px
 }
 
-#est4b {
+#estB4 {
   left: 445px;
   top: 205px
 }
 
-#est5b {
+#estB5 {
   left: 590px;
   top: 205px
 }
 
-#est6b {
+#estB6 {
   left: 735px;
   top: 205px
 }
 
 /*Position the back row of destination cards*/
-#dest1b {
+#destB1 {
   left: 10px;
     top: 460px
 }
 
-#dest2b {
+#destB2 {
   left: 155px;
   top: 460px
 }
 
-#dest3b {
+#destB3 {
   left: 300px;
   top: 460px
 }
 
-#dest4b {
+#destB4 {
   left: 445px;
   top: 460px
 }
 
-#dest5b {
+#destB5 {
   left: 590px;
   top: 460px
 }
 
-#dest6b {
+#destB6 {
   left: 735px;
   top: 460px
 }
@@ -277,32 +290,32 @@ p.num {
 
 #iest1 {
   left: 30px;
-  top: 370px
+  top: 380px
 }
 
 #iest2 {
   left: 175px;
-  top: 370px
+  top: 380px
 }
 
 #iest3 {
   left: 320px;
-  top: 370px
+  top: 380px
 }
 
 #iest4 {
   left: 465px;
-  top: 370px
+  top: 380px
 }
 
 #iest5 {
   left: 610px;
-  top: 370px
+  top: 380px
 }
 
 #iest6 {
   left: 755px;
-  top: 370px
+  top: 380px
 }
 
 
@@ -310,30 +323,30 @@ p.num {
 
 #idest1 {
   left: 30px;
-  top: 625px
+  top: 645px
 }
 
 #idest2 {
   left: 175px;
-  top: 625px
+  top: 645px
 }
 
 #idest3 {
   left: 320px;
-  top: 625px
+  top: 645px
 }
 
 #idest4 {
   left: 465px;
-  top: 625px
+  top: 645px
 }
 
 #idest5 {
   left: 610px;
-  top: 625px
+  top: 645px
 }
 
 #idest6 {
   left: 755px;
-  top: 625px
+  top: 645px
 }
