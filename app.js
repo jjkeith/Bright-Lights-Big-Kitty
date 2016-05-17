@@ -24,6 +24,8 @@ var game = {
     activeProperty: null,
     player1BalanceDisplay: $('.player1BalanceDisplay'),
     player2BalanceDisplay: $('.player2BalanceDisplay'),
+    player1Announce: $('#player1Announce'),
+    player2Announce: $('#player2Announce'),
 
     //gameplay variables
     currentPlayer: null,
@@ -133,6 +135,7 @@ game.roll.click(function(){
     }
 
     //display updated balances
+    //I'd really like the balances to flash yellow when changed
     game.player1BalanceDisplay.html('ξ' + game.player1.balance);
     game.player2BalanceDisplay.html('ξ' + game.player2.balance);
 
@@ -141,12 +144,16 @@ game.roll.click(function(){
 })
 
 
-// Switch players
+// Switch players, switch active player to yellow
 var switchTurns = function () {
   if (game.currentPlayer == game.player1) {
     game.currentPlayer = game.player2;
+    game.player2Announce.css('color', 'yellow');
+    game.player1Announce.css('color', 'black');
   } else {
     game.currentPlayer = game.player1;
+    game.player1Announce.css('color', 'yellow');
+    game.player2Announce.css('color', '#121212');
   }
 }
 
