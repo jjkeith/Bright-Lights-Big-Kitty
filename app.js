@@ -5,18 +5,22 @@
 var game = {
   // player object; start each player with 10 cat coins
   player1: {
-    id: 'Player 1',
-    balance: 10,
+    name: 'Player 1',
+    id: 'player1',
+    balance: 12,
     color: '#448888',
-    balanceDisplay: $('.player1BalanceDisplay'),
+    balanceDisplay: $('#player1BalanceDisplay'),
     announce: $('#player1Announce'),
+    destinationProgress: 0
   },
   player2: {
-    id: 'Player 2',
+    name: 'Player 2',
+    id: 'player2',
     balance: 10,
     color: '#b1d46a',
-    balanceDisplay: $('.player2BalanceDisplay'),
+    balanceDisplay: $('#player2BalanceDisplay'),
     announce: $('#player2Announce'),
+    destinationProgress: 0
   },
 
     // button variables
@@ -24,27 +28,27 @@ var game = {
     reset: $('#reset'),
     roll: $('#roll'),
 
-    //DOM variables.
-    $h1: $('<h1>'),
-
-    // player1BalanceDisplay: $('.player1BalanceDisplay'),
-    // player2BalanceDisplay: $('.player2BalanceDisplay'),
-    // player1Announce: $('#player1Announce'), // turns yellow when it's player 1's turn
-    // player2Announce: $('#player2Announce'), // turns yellow when it's player 2's turn
-
     //gameplay variables
     currentPlayer: null,
     currentRoll: null,
-    activeProperty: null,
+    activeEstablishment: null,
+    activeDestination: null,
 
     //dialog string variables
-    strings: ["The Veterinary Offices of Katz & Nuzzle for ξ1",
+    establishmentStrings: ["The Veterinary Offices of Katz & Nuzzle for ξ1",
       "Tuna 'R' Us for ξ2",
       "Purrfect Coif Groomer for ξ3",
       "Clawsitive Reinforcement Training Academy for ξ4",
       "Pawsplay Costume Rentals for ξ5",
       "Flea Strasburg Acting School for ξ6"],
+    destinationStrings: ['Catnip Dispensary  for ξ10',
+      'Tuna Cannery for ξ15',
+      'Catapult Magazine Headquarters for ξ20',
+      'Paw-trait Studio for ξ25',
+      'CatCon Venue for ξ30',
+      'WCAT Television Station for ξ35']
 }
+
 //display balances at start of game
 function  updateBalances() {
   game.player1.balanceDisplay.html('ξ' + game.player1.balance);
@@ -53,6 +57,7 @@ function  updateBalances() {
 updateBalances();
 
 //Activate the start button and randomize a starting player
+//come back to this and find a more elegant way of announcing turns
 game.start.click(function() {
   console.log("start")
   var random = Math.random();
@@ -66,55 +71,59 @@ game.start.click(function() {
   return game.currentPlayer
 })
 
-//activate the roll button and play a turn
-//WHEN THE BUTTON IS CLICKED THE ENTIRE FUNCTION RUNS AND DOESN'T WAIT FOR FEEDBACK
-//because this code runs all at once, the switchTurns causes the wrong accounts to be charged
-//is setInterval an option?
-//https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/setInterval
+//roll the die and buy properties
 game.roll.click(function(){
   //make the roll button work if start hasn't been pushed
   if (game.currentPlayer == null) {
     game.currentPlayer = game.player1
   }
-  //create a die roll from 0 to 5
+  //create a die roll from 0 to 5 that coordinates with array indeces.
   game.currentRoll = (Math.floor(Math.random() * 6));
 
   //give the user a normalized 1 through 6 die roll
-  $(".modal-title").html(game.currentPlayer.id + ' rolled a ' +
+  $(".modal-title").html(game.currentPlayer.name + ' rolled a ' +
     (game.currentRoll + 1));
 
-  //define the active property
-  game.activeProperty = $('[data-number=' + game.currentRoll +']')
-  console.log(game.activeProperty[0] + ' is the active property')
+  //ensure that the footer is populated
+  insertModalButtons();
 
-  // if the establishment is unpurchased and the player has enough money, give
-  //them the option to buy
-  if (game.currentPlayer.balance >= (game.currentRoll + 1)) {
-    if (((game.activeProperty.first()).hasClass('unpurchased'))
-      || ((game.activeProperty.last()).hasClass('unpurchased'))) {
-        purchaseOption(game.currentPlayer);
+  //define the active property, of which there are two copies
+  game.activeEstablishment = $('[data-number=' + game.currentRoll +']')
+  game.activeDestination = $('[data-number=' + (game.currentPlayer.destinationProgress + 10) +']')
+
+  // if the player has enough money to buy establishments, but not enough to buy destinations
+  if (((game.currentRoll + 1) <= (game.currentPlayer.balance)) &&
+      (game.currentPlayer.balance < ((game.currentPlayer.destinationProgress * 5) + 11))) {
+    if (((game.activeEstablishment.first()).hasClass('unpurchased'))
+      || ((game.activeEstablishment.last()).hasClass('unpurchased'))) {
+        buyEstablishments(game.currentPlayer);
       } else {
+          $(".modal-footer").html('');
           $(".modal-body").html('Both of the properties for this roll have been purchased.')
       }
-    } else {
+    } else if (game.currentPlayer.balance < (game.currentRoll + 1)) {
+      $(".modal-footer").html('');
       $(".modal-body").html('You have ξ' + game.currentPlayer.balance +
         ' in the bank.<br />' + 'Sorry, that is not enough to buy ' +
-        game.strings[game.currentRoll]);
+        game.establishmentStrings[game.currentRoll]);
+    } else if  ((game.currentPlayer.balance) > (game.currentPlayer.destinationProgress * 5) + 11) {
+      console.log("this is where we do some bidness");
+      buyDestinations(game.currentPlayer);
     }
 
-    //this is where people are supposed to be earning rent, but it's not working
-    if ((game.activeProperty.first()).hasClass('player1') ||
-        (game.activeProperty.last()).hasClass('player1')) {
+    //players collect rent on owned properties
+    if ((game.activeEstablishment.first()).hasClass('player1') ||
+        (game.activeEstablishment.last()).hasClass('player1')) {
       game.player1.balance += game.currentRoll + 1;
       console.log('Player 1 now has ξ' + game.player1.balance)
-    } else if ((game.activeProperty.first()).hasClass('player2') ||
-        (game.activeProperty.last()).hasClass('player2')) {
+    } else if ((game.activeEstablishment.first()).hasClass('player2') ||
+        (game.activeEstablishment.last()).hasClass('player2')) {
       game.player2.balance += game.currentRoll + 1;
       console.log('Player 2 now has ξ' + game.player2.balance)
     }
 
     updateBalances();
-    console.log(switchTurns)
+    console.log('switchTurns')
     switchTurns ();
 })
 
@@ -122,47 +131,82 @@ game.roll.click(function(){
 function  switchTurns () {
   if (game.currentPlayer == game.player1) {
     game.currentPlayer = game.player2;
-    game.player2.announce.css('color', 'yellow');
-    game.player1.announce.css('color', 'black');
+    game.player1.announce.css({'color': 'yellow', 'border': '2px solid yellow'}); // this is some ugly styling. pleaes fix later.
+    game.player2.announce.css({'color': '#121212', 'border': 'none'});
   } else {
     game.currentPlayer = game.player1;
-    game.player1.announce.css('color', 'yellow');
-    game.player2.announce.css('color', '#121212');
+    game.player2.announce.css({'color': 'yellow', 'border': '2px solid yellow'});
+    game.player1.announce.css({'color': '#121212', 'border': 'none'});
   }
 }
 
-function purchaseOption(player) {
+//populate the modal footer with yes/no buttons
+function insertModalButtons() {
+  $(".modal-footer").html("<button type='button' class='btn btn-default'" +
+  " data-dismiss='modal' id = 'no'>No</button>" +
+    "<button type='button' class='btn btn-primary' data-dismiss='modal' id = 'yes'>Yes</button>");
+}
+
+//gudie the player through buying a destination
+function buyDestinations(player) {
+  console.log("launching buyDestinations");
+  $(".modal-body").html('You have ξ' + game.currentPlayer.balance + ' in the bank.<br />'
+    + "That's enough to buy your next destination!<br />"
+    + 'Would you like to buy ' + game.destinationStrings[player.destinationProgress] + '?');
+
+  //Take the steps for the player to buy the property if click yes
+  //else take the player to buy establishment
+  $('#yes').on('click', {player: player} ,function(evt) {
+    console.log("Entering yes DESTINATION function. Current player is " + evt.data.player.name)
+    evt.data.player.balance -= ((evt.data.player.destinationProgress * 5) + 10);
+
+    if ((game.activeDestination.first()).hasClass('purchased')) {
+        (game.activeDestination.last()).css("background-color", evt.data.player.color);
+        (game.activeDestination.last()).removeClass('unpurchased');
+        (game.activeDestination.last()).addClass('purchased' + " " + evt.data.player.id);
+    } else {
+        (game.activeDestination.first()).css("background-color", evt.data.player.color);
+        (game.activeDestination.first()).removeClass('unpurchased');
+        (game.activeDestination.first()).addClass('purchased' + " " + evt.data.player.id);
+    }
+    evt.data.player.balanceDisplay.html('ξ' + evt.data.player.balance);
+  });
+  $('#no').on('click', {player: player} ,function(evt) {
+    buyEstablishments(game.currentPlayer);
+});
+}
+
+
+function buyEstablishments(player) {
   $(".modal-body").html('You have ξ' + player.balance +
     ' in the bank.<br />' + 'Would you like to buy ' +
-    game.strings[game.currentRoll] + '?');
-
-  //Can this be done better with a toggle class?
-  // $(".modal-footer").html("<button type='button' class='btn btn-default' data-dismiss='modal'>No</button><button type='button' class='btn btn-primary' data-dismiss='modal' id = 'yes'>Yes</button>");
+    game.establishmentStrings[game.currentRoll] + '?');
 
   //Take the steps for the player to buy the property
   $('#yes').on('click', {player: player} ,function(evt) {
-    console.log(evt.data);
-    console.log("Entering yes function. Current player is " + evt.data.player.id)
-
+    console.log("Entering yes function. Current player is " + evt.data.player.name)
     evt.data.player.balance -= (game.currentRoll + 1);
 
     //Use the classes to mark properties as purchased and which player owns it
     //This code seems really chunky. There must be a better way.
-    if ((game.activeProperty.first()).hasClass('purchased')) {
-        (game.activeProperty.last()).css("background-color", evt.data.player.color);
-        (game.activeProperty.last()).removeClass('unpurchased');
-        (game.activeProperty.last()).addClass('purchased' + "'" + evt.data.player + "'");
+    if ((game.activeEstablishment.first()).hasClass('purchased')) {
+        (game.activeEstablishment.last()).css("background-color", evt.data.player.color);
+        (game.activeEstablishment.last()).removeClass('unpurchased');
+        (game.activeEstablishment.last()).addClass('purchased' + " " + evt.data.player.id);
     } else {
-        (game.activeProperty.first()).css("background-color", evt.data.player.color);
-        (game.activeProperty.first()).removeClass('unpurchased');
-        (game.activeProperty.first()).addClass('purchased' + "'" + evt.data.player + "'");
+        (game.activeEstablishment.first()).css("background-color", evt.data.player.color);
+        (game.activeEstablishment.first()).removeClass('unpurchased');
+        (game.activeEstablishment.first()).addClass('purchased' + " " + evt.data.player.id);
     }
     evt.data.player.balanceDisplay.html('ξ' + evt.data.player.balance);
-
   });
 }
+
+
 //Activate the reset button
 game.reset.click(function() {
   console.log("reset")
-  currentPlayer = null;
+  game.currentPlayer = null;
+  game.player1.balance = 10;
+  game.player2.balance = 10
 })

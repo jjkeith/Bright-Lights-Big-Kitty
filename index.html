@@ -35,7 +35,7 @@
 
 <!-- begin console -->
 <div class = 'console-info' id = 'player1'><h3 id = player1Announce>Player 1</h3>
-  <h4 class = 'player1BalanceDisplay'></h4></div>
+  <h4 id = 'player1BalanceDisplay'></h4></div>
 <div class = 'console-info' id = 'die'>
   <!-- Button trigger modal -->
   <h3><button type="button" class="btn btn-default btn-sm"
@@ -43,7 +43,7 @@
   <!-- <br />⚀ ⚁ ⚂ ⚃ ⚄ ⚅ -->
 </div>
 <div class = 'console-info' id = 'player2'><h3 id = player2Announce>Player 2</h3>
-  <h4 class = 'player2BalanceDisplay'></h4></div>
+  <h4 id = 'player2BalanceDisplay'></h4></div>
 
 
 <!-- begin first row of cards -->
@@ -70,7 +70,7 @@
   <p>Pawsplay Costume Rentals<br /><strong>ξ5</strong></div>
 
 <div class = 'card unpurchased establishment' id = 'estA6' data-number = '5'><p class=num>⑥</p>
-  <p>Flea Strasburg Acting School<br /><strong>ξ2</strong></p></div>
+  <p>Flea Strasburg Acting School<br /><strong>ξ6</strong></p></div>
 
 <!-- The backrow of cards -->
 <div class = 'card-behind unpurchased establishment' id = 'estB1' data-number = '0'><p></div>
@@ -98,31 +98,31 @@
   Get WCAT Television Station to win!</h4>
 
 <!-- Top cards start here -->
-<div class = 'card unpurchased' id = 'destA1'><p class=num>①</p>
+<div class = 'card unpurchased destination' id = 'destA1'  data-number = '10'><p class=num>①</p>
   <p>Catnip Dispensary<br /><strong>ξ10</strong></p></div>
 
-<div class = 'card unpurchased' id = 'destA2'><p class=num>②</p>
+<div class = 'card unpurchased destination' id = 'destA2' data-number = '11'><p class=num>②</p>
   <p>Tuna Cannery<br /><strong>ξ15</strong></p></div>
 
-<div class = 'card unpurchased' id = 'destA3'><p class=num>③</p>
+<div class = 'card unpurchased destination' id = 'destA3' data-number = '12'><p class=num>③</p>
   <p>Catapult Magazine Headquarters<br /><strong>ξ20</strong></p></div>
 
-<div class = 'card unpurchased' id = 'destA4'><p class=num>④</p>
+<div class = 'card unpurchased destination' id = 'destA4' data-number = '13'><p class=num>④</p>
   <p>Paw-trait Studio<br /><strong>ξ25</strong></p></div>
 
-<div class = 'card unpurchased' id = 'destA5'><p class=num>⑤</p>
+<div class = 'card unpurchased destination' id = 'destA5' data-number = '14'><p class=num>⑤</p>
   <p>CatCon Venue<br /><strong>ξ30</strong></p></div>
 
-<div class = 'card unpurchased' id = 'destA6'><p class=num>⑥</p>
+<div class = 'card unpurchased destination' id = 'destA6' data-number = '15'><p class=num>⑥</p>
   <p>WCAT Television Station<br /><strong>ξ35</strong></p></div>
 
 <!-- The backrow of cards -->
-<div class = 'card-behind unpurchased' id = 'destB1'><p></div>
-<div class = 'card-behind unpurchased' id = 'destB2'><p></div>
-<div class = 'card-behind unpurchased' id = 'destB3'><p></div>
-<div class = 'card-behind unpurchased' id = 'destB4'><p></div>
-<div class = 'card-behind unpurchased' id = 'destB5'><p></div>
-<div class = 'card-behind unpurchased' id = 'destB6'><p></div>
+<div class = 'card-behind unpurchased destination' id = 'destB1' data-number = '10'><p></div>
+<div class = 'card-behind unpurchased destination' id = 'destB2' data-number = '11'><p></div>
+<div class = 'card-behind unpurchased destination' id = 'destB3' data-number = '12'><p></div>
+<div class = 'card-behind unpurchased destination' id = 'destB4' data-number = '13'><p></div>
+<div class = 'card-behind unpurchased destination' id = 'destB5' data-number = '14'><p></div>
+<div class = 'card-behind unpurchased destination' id = 'destB6' data-number = '15'><p></div>
 
 <!-- Info blocks beneath each card -->
 <div class = 'info-card' id = 'idest1'><p>Earns + ξ1 on ①</p></div>
@@ -148,8 +148,8 @@
         <p>Do you want to buy something?</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" id = 'yes'>Yes</button>
+        <button type='button' class='btn btn-default' data-dismiss='modal' id = 'no'>No</button>
+        <button type='button' class='btn btn-primary' data-dismiss='modal' id = 'yes'>Yes</button>
       </div>
     </div>
   </div>
