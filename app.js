@@ -22,6 +22,8 @@ var game = {
     //DOM variables.
     $h1: $('<h1>'),
     activeProperty: null,
+    player1BalanceDisplay: $('.player1BalanceDisplay'),
+    player2BalanceDisplay: $('.player2BalanceDisplay'),
 
     //gameplay variables
     currentPlayer: null,
@@ -35,7 +37,9 @@ var game = {
       "Pawsplay Costume Rentals for ξ5",
       "Flea Strasburg Acting School for ξ6"],
 }
-
+//display balances at start of game
+game.player1BalanceDisplay.html('ξ' + game.player1.balance);
+game.player2BalanceDisplay.html('ξ' + game.player2.balance);
 
 //Activate the start button and randomize a starting player
 game.start.click(function() {
@@ -52,8 +56,11 @@ game.start.click(function() {
 })
 
 //activate the roll button and play a turn
+//WHEN THE BUTTON IS CLICKED THE ENTIRE FUNCTION RUNS AND DOESN'T WAIT FOR FEEDBACK
+//because this code runs all at once, the switchTurns causes the wrong accounts to be charged
+//is setInterval an option?
+//https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/setInterval
 game.roll.click(function(){
-
   //make the roll button work if start hasn't been pushed
   if (game.currentPlayer == null) {
     game.currentPlayer = game.player1
@@ -66,7 +73,8 @@ game.roll.click(function(){
   $(".modal-title").html('');
 
   //give the user a normalized 1 through 6 die roll
-  $(".modal-title").html(game.currentPlayer.id + ' rolled a ' + (game.currentRoll + 1));
+  $(".modal-title").html(game.currentPlayer.id + ' rolled a ' +
+    (game.currentRoll + 1));
 
   //strip the body and footer html out of the modal
   $(".modal-body").html('');
@@ -80,9 +88,9 @@ game.roll.click(function(){
   //them the option to buy
   if (game.currentPlayer.balance >= (game.currentRoll + 1)) {
     if (((game.activeProperty.first()).hasClass('unpurchased'))
-      || ((game.activeProperty.last()).contains('unpurchased'))) {
-        $(".modal-body").html('You have ' + game.currentPlayer.balance +
-          'ξ in the bank.<br />' + 'Would you like to buy ' +
+      || ((game.activeProperty.last()).hasClass('unpurchased'))) {
+        $(".modal-body").html('You have ξ' + game.currentPlayer.balance +
+          ' in the bank.<br />' + 'Would you like to buy ' +
           game.strings[game.currentRoll] + '?');
 
         //Can this be done better with a toggle class?
@@ -90,34 +98,56 @@ game.roll.click(function(){
 
         //Take the steps for the player to buy the property
         $('#yes').click(function() {
-          game.currentPlayer.balance = game.currentPlayer.balance - game.currentRoll;
+          game.currentPlayer.balance -= (game.currentRoll + 1);
+
+          //Use the classes to mark properties as purchased and which player owns it
+          //This code seems really chunky. There must be a better way.
           if ((game.activeProperty.first()).hasClass('purchased')) {
               (game.activeProperty.last()).css("background-color", game.currentPlayer.color);
+              (game.activeProperty.last()).removeClass('unpurchased');
+              (game.activeProperty.last()).toggleClass('purchased' + "'" + game.currentPlayer + "'");
+          } else {
+              (game.activeProperty.first()).css("background-color", game.currentPlayer.color);
+              (game.activeProperty.first()).removeClass('unpurchased');
+              (game.activeProperty.first()).toggleClass('purchased' + "'" + game.currentPlayer + "'");
           }
-          else {
-          (game.activeProperty.first()).css("background-color", game.currentPlayer.color);
-          }
-          (game.activeProperty.first()).toggleClass('purchased');
-          console.log(game.currentPlayer.id + ' has ξ' + game.currentPlayer.balance + ' in the bank.')
         })
       } else {
           $(".modal-body").html('Both of the properties for this roll have been purchased.')
       }
     } else {
-      $(".modal-body").html('You have ' + game.currentPlayer.balance + 'ξ in the bank.<br />' + 'Sorry, that is not enough to buy ' + game.strings[game.currentRoll]);
-      console.log(game.currentPlayer.id + ' has ξ' + game.currentPlayer.balance + ' in the bank.')
+      $(".modal-body").html('You have ξ' + game.currentPlayer.balance +
+        ' in the bank.<br />' + 'Sorry, that is not enough to buy ' +
+        game.strings[game.currentRoll]);
     }
+
+    //this is where people are supposed to be earning rent, but it's not working
+    if ((game.activeProperty.first()).hasClass('player1') ||
+        (game.activeProperty.last()).hasClass('player1')) {
+      game.player1.balance += game.currentRoll + 1;
+      console.log('Player 1 now has ξ' + game.player1.balance)
+    } else if ((game.activeProperty.first()).hasClass('player2') ||
+        (game.activeProperty.last()).hasClass('player2')) {
+      game.player2.balance += game.currentRoll + 1;
+      console.log('Player 2 now has ξ' + game.player2.balance)
+    }
+
+    //display updated balances
+    game.player1BalanceDisplay.html('ξ' + game.player1.balance);
+    game.player2BalanceDisplay.html('ξ' + game.player2.balance);
+
+    console.log(game.currentPlayer.id + ' has ξ' + game.currentPlayer.balance + ' in the bank.')
     switchTurns ();
 })
 
 
 // Switch players
 var switchTurns = function () {
-if (game.currentPlayer == game.player1) {
-  game.currentPlayer = game.player2;
-} else {
-  game.currentPlayer = game.player1;
-}
+  if (game.currentPlayer == game.player1) {
+    game.currentPlayer = game.player2;
+  } else {
+    game.currentPlayer = game.player1;
+  }
 }
 
 //Activate the reset button
