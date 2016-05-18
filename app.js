@@ -1,16 +1,9 @@
 /*\ primary issues:
 |*| • Can't bring back a modal without hitting the roll button again
-|*|      (or if the modal gets a preventDefault then it can never be shut)
-|*| • The destination purchasing is super wonky. It skips five, let's one player buy two, etc.
-|*|      I can't see what's wrong with the destination code. It's a simple counter. 5 = win.
-|*| • Sometimes the buttons show up when there is no property to buy. Usually on a roll of five?
-|*| • The winner checker in switchTurns is working as a console.log, but I don't know how to get a modal for it.
-|*| • Winning isn't ending the game.
-|*|******** • Rent needs to be added before a player decides to buy
-|*| • The yellow highlighting on the active player is opposite (unless I flip it, but that seems sloppy)
-|*| • I want the modal-header to change color when the active player changes. I have a add/remove class setup, but it's not working.
-|*| • Bootstrap buttons are sub cute.
-|*| • The CSS could be more succinct.
+|*| • The winner checker in switchTurns is working as a console.log, but the modal is wonky.
+|*| • If a player owns two properties, they are only getting rent for one.
+|*| • I have the JS to recognize some keycommands, but I don't know how to hook it up to interacting with the modal.
+|*| • Prompt players to enter their names and replace "player1" and "player2" with names?
 \*/
 
 var game = {
@@ -45,6 +38,8 @@ var game = {
     activeEstablishment: null,
     activeDestination: null,
 
+    allCards: $('.card'),
+
     //dialog string variables
     establishmentStrings: ["The Veterinary Offices of Katz & Nuzzle for ξ1",
       "Tuna 'R' Us for ξ2",
@@ -60,17 +55,12 @@ var game = {
       'WCAT Television Station for ξ30']
 }
 
-//display balances at start of game
-function  updateBalances() {
-  game.player1.balanceDisplay.html('ξ' + game.player1.balance);
-  game.player2.balanceDisplay.html('ξ' + game.player2.balance);
-}
-updateBalances();
+
 
 //Activate the start button and randomize a starting player
-//come back to this and find a more elegant way of announcing turns
 game.start.click(function() {
   console.log("start")
+  updateBalances();
   var random = Math.random();
   if (random < .5) {
     game.currentPlayer = game.player1;
@@ -82,152 +72,204 @@ game.start.click(function() {
   return game.currentPlayer
 })
 
+///////////////*Major Roll Function*\\\\\\\\\\\\\\\\\\\\\\\\
+
 //roll the die and buy properties
 game.roll.click(function(){
   //make the roll button work if start hasn't been pushed
   if (game.currentPlayer == null) {
     game.currentPlayer = game.player1
+    $(".modal-header").css('background-color', game.currentPlayer.color);
   }
   //create a die roll from 0 to 5 that coordinates with array indeces.
   game.currentRoll = (Math.floor(Math.random() * 6));
+  console.warn(game.currentPlayer.name + ' rolled a ' + (game.currentRoll + 1));
 
   //give the user a normalized 1 through 6 die roll
   $(".modal-title").html(game.currentPlayer.name + ' rolled a ' +
     (game.currentRoll + 1));
 
-  //ensure that the footer is populated
-  insertModalButtons();
+  //populate the modal footer with yes/no buttons
+  $(".modal-footer").html("<button type='button' class='btn btn-default'" +
+    " data-dismiss='null' id = 'no'>Nah</button>" +
+      "<button type='button' class='btn btn-primary' data-dismiss='modal' id = 'yes'>Totally!</button>");
 
   //define the active property, of which there are two copies
   game.activeEstablishment = $('[data-number=' + game.currentRoll +']')
   game.activeDestination = $('[data-number=' + (game.currentPlayer.destinationProgress + 10) +']')
 
-  // if the player has enough money to buy establishments, but not enough to buy destinations
-  if (((game.currentRoll + 1) <= (game.currentPlayer.balance)) &&
+  // if player doesn't have enough money to buy the property associated with roll.
+  if (game.currentPlayer.balance < (game.currentRoll + 1)) {
+    $(".modal-footer").html("<button type='button' class='btn btn-default' data-dismiss='modal' id = 'oh'>Oh, well</button>");
+    $(".modal-body").html('You have ξ' + game.currentPlayer.balance +
+      ' in the bank.<br />' + 'Sorry, that is not enough to buy ' +
+      game.establishmentStrings[game.currentRoll]);
+      console.log('sale is not going to happen')
+      $('#oh').on('click', function(evt) {
+        console.log('switchTurns')
+        switchTurns ();
+    });
 
-  //
+    //Pay rent to the players
+    payRent(game.currentPlayer);
+
+  // if the player has enough money to buy establishments, but not enough to buy destinations
+  } else if (((game.currentRoll + 1) <= (game.currentPlayer.balance)) &&
       (game.currentPlayer.balance < ((game.currentPlayer.destinationProgress * 4) + 11))) {
+
+    // ensure that the top card is purchased first
     if (((game.activeEstablishment.first()).hasClass('unpurchased'))
       || ((game.activeEstablishment.last()).hasClass('unpurchased'))) {
         $(".modal-body").html('You have ξ' + game.currentPlayer.balance +
           ' in the bank.<br />' + 'Would you like to buy ' +
           game.establishmentStrings[game.currentRoll] + '?');
-        console.log('asking player if they want to buy an establishment')
-        buyEstablishments(game.currentPlayer);
-      } else {
-          $(".modal-footer").html('');
-          $(".modal-body").html('Both of the properties for this roll have been purchased.')
-      }
+          buyEstablishments(game.currentPlayer);
 
-    //would prefer it if this didn't display if both properties are purchased
-    } else if (game.currentPlayer.balance < (game.currentRoll + 1)) {
-      $(".modal-footer").html('');
-      $(".modal-body").html('You have ξ' + game.currentPlayer.balance +
-        ' in the bank.<br />' + 'Sorry, that is not enough to buy ' +
-        game.establishmentStrings[game.currentRoll]);
-        console.log('sale is not going to happen')
+      // if this limitation isn't placed, under some circumstances it will run switchTurns x2
+      } else if (((game.activeEstablishment.first()).hasClass('purchased'))
+        && ((game.activeEstablishment.last()).hasClass('purchased'))) {
+          $(".modal-footer").html("<button type='button' class='btn btn-default' data-dismiss='modal' id = 'oh'>Oh, well</button>");
+          $(".modal-body").html('Both of the properties for this roll have been purchased.')
+
+          $('#oh').on('click', function(evt) {
+            console.log('switchTurns')
+            switchTurns ();
+          });
+          }
+
+    //if the player has enough money to buy the next destination property
     } else if  ((game.currentPlayer.balance) > (game.currentPlayer.destinationProgress * 4) + 11) {
-      console.log("this is where we do some bidness");
       buyDestinations(game.currentPlayer);
     }
-
-    //players collect rent on owned properties
-    if ((game.activeEstablishment.first()).hasClass('player1') ||
-        (game.activeEstablishment.last()).hasClass('player1')) {
-
-          //Because a player can only get rent bonuses for the destinationProgress they already have
-        if (game.player1.destinationProgress > game.currentRoll) {
-            game.player1.balance += game.currentRoll + 2;
-        } else {
-            game.player1.balance += game.currentRoll + 1;
-        }
-    } else if ((game.activeEstablishment.first()).hasClass('player2') ||
-        (game.activeEstablishment.last()).hasClass('player2')) {
-          if (game.player2.destinationProgress > game.currentRoll) {
-              game.player2.balance += game.currentRoll + 2;
-          } else {
-              game.player2.balance += game.currentRoll + 1;
-          }
-        }
     updateBalances();
-    console.log('switchTurns')
-    switchTurns ();
 })
+
+///////////////*Helper Functions*\\\\\\\\\\\\\\\\\\\\\\\\
 
 // Switch players, highlight active players
 //make the modal header match the player's color
 function  switchTurns () {
-  if (game.currentPlayer.destinationProgress == 5) {
+  if (game.currentPlayer.destinationProgress == 6) {
     console.log(game.currentPlayer.name + ' WON!!!! OMG!!')
+    //winGame not currently launching
+    winGame();
   } else if (game.currentPlayer == game.player1) {
     game.currentPlayer = game.player2;
-
-    //The add and remove classes are not working. CSS injections didn't work either.
-    $("modal-header").removeClass('.player1-modal')
     game.player2.announce.css({'color': '#E1BC29', 'border': '2px solid #E1BC29'});
     game.player1.announce.css({'color': '#121212', 'border': '2px solid #121212'});
   } else {
     game.currentPlayer = game.player1;
-    $("modal-header").addClass('.player1-modal')
     game.player1.announce.css({'color': '#E1BC29', 'border': '2px solid #E1BC29'});
     game.player2.announce.css({'color': '#121212', 'border': '2px solid #121212'});
   }
+  $(".modal-header").css('background-color', game.currentPlayer.color);
 }
 
-//populate the modal footer with yes/no buttons
-function insertModalButtons() {
-  $(".modal-footer").html("<button type='button' class='btn btn-default'" +
-  " data-dismiss='null' id = 'no'>No</button>" +
-    "<button type='button' class='btn btn-primary' data-dismiss='modal' id = 'yes'>Yes</button>");
+
+//display balances at start of game
+function updateBalances() {
+  game.player1.balanceDisplay.html('ξ' + game.player1.balance);
+  game.player2.balanceDisplay.html('ξ' + game.player2.balance);
 }
 
+
+function winGame () {
+  $('#myModal').modal('show');
+  // $(".modal-body").html("Do you want to play again?<br /><iframe width='560' height='315' src='https://www.youtube.com/embed/gVQWxlRE52Q' frameborder='0' allowfullscreen></iframe>");
+  // $(".modal-header").html('<h4>' + game.currentPlayer.name + ' WON!!!! OMG!!</h4>');
+
+  $('#yes').on('click', function(evt) {
+    game.reset.click()
+  });
+}
+
+//Pay rent to the player on every roll
+payRent = function(player) {
+//Player 1 rent
+  if ((game.activeEstablishment.first()).hasClass('player1') &&
+      (game.activeEstablishment.last()).hasClass('player1')) {
+      game.player1.balance += ((game.currentRoll + 1) * 2);
+      var player1rent = ((game.currentRoll + 1) * 2)
+  } else if ((game.activeEstablishment.first()).hasClass('player1') ||
+      (game.activeEstablishment.last()).hasClass('player1')) {
+
+        //Because a player can only get rent bonuses for the destinationProgress they already have
+      if (game.player1.destinationProgress > game.currentRoll) {
+          game.player1.balance += (game.currentRoll + 2);
+          var player1rent = (game.currentRoll + 2);
+      } else {
+          game.player1.balance += (game.currentRoll + 1);
+          var player1rent = (game.currentRoll + 1);
+      }
+  console.warn(">>>>>>Player 1 earnings = " + player1rent)
+
+//Player 2 rent
+  } else if ((game.activeEstablishment.first()).hasClass('player2') &&
+      (game.activeEstablishment.last()).hasClass('player2')) {
+      game.player2.balance += ((game.currentRoll + 1) * 2);
+      var player2rent = ((game.currentRoll + 1) * 2);
+  } else if ((game.activeEstablishment.first()).hasClass('player2') ||
+      (game.activeEstablishment.last()).hasClass('player2')) {
+        if (game.player2.destinationProgress > game.currentRoll) {
+            game.player2.balance += (game.currentRoll + 2);
+            var player2rent = (game.currentRoll + 2);
+        } else {
+            game.player2.balance += (game.currentRoll + 1);
+            var player2rent = (game.currentRoll + 1);
+        }
+  console.warn(">>>>>>Player 2 earnings = " + player2rent)
+  }
+}
 
 //guide the player through buying a destination
 function buyDestinations(player) {
-  console.log("launching buyDestinations a.k.a. bidness");
+//Populate the modal
+  $(".modal-footer").html("<button type='button' class='btn btn-default'" +
+    " data-dismiss='modal' id = 'nope'>Nope</button>" +  //////REGARD THE DATA DISMISS
+    "<button type='button' class='btn btn-primary' data-dismiss='modal' id = 'yes'>Let's build a cat empire!</button>");
   $(".modal-body").html('You have ξ' + game.currentPlayer.balance + ' in the bank.<br />'
     + "That's enough to buy a destination!<br />"
     + 'Would you like to buy ' + game.destinationStrings[player.destinationProgress] + '?');
 
-  //Take the steps for the player to buy the property if click yes
-  //else take the player to buy establishment
+  //Take the steps for the player to buy the property or not
   $('#yes').on('click', {player: player} ,function(evt) {
-    evt.data.player.balance -= ((evt.data.player.destinationProgress * 4) + 10);
-
-    //This is adding to the wrong player's score, but it is giving the property to the right person
-    //The counter seems to go only once and the property that is offered to the player is tied to it so it shouldn't skip.
+        console.log('Before' + evt.data.player.balance)
+        evt.data.player.balance -= ((evt.data.player.destinationProgress * 4) + 10);
+        console.log('After' + evt.data.player.balance)
     evt.data.player.destinationProgress += 1;
-    console.log("Destination progress = " + game.player2.destinationProgress + " for player2")
-    console.log("Destination progress = " + game.player1.destinationProgress + " for player1")
+        console.log("Destination progress = " + game.player2.destinationProgress + " for player2")
+        console.log("Destination progress = " + game.player1.destinationProgress + " for player1")
     evt.data.player.balanceDisplay.html('ξ' + evt.data.player.balance);
     if ((game.activeDestination.first()).hasClass('purchased')) {
         (game.activeDestination.last()).css("background-color", evt.data.player.color);
-        (game.activeDestination.last()).removeClass('unpurchased');
-        (game.activeDestination.last()).addClass('purchased' + " " + evt.data.player.id);
+        (game.activeDestination.last()).removeClass('unpurchased').addClass('purchased' + " " + evt.data.player.id);
     } else {
         (game.activeDestination.first()).css("background-color", evt.data.player.color);
-        (game.activeDestination.first()).removeClass('unpurchased');
-        (game.activeDestination.first()).addClass('purchased' + " " + evt.data.player.id);
-      }
+        (game.activeDestination.first()).removeClass('unpurchased').addClass('purchased' + " " + evt.data.player.id);
+    }
+    console.log('switchTurns')
+    switchTurns ();
     });
 
-  $('#no').on('click', {player: player} ,function(evt) {
-    console.log("no click, preventing default")
-    event.preventDefault(); // this mofo is breaking a lot of stuff
+  $('#nope').on('click', {player: player} ,function(evt) {
+    $(".modal-footer").html("<button type='button' class='btn btn-default'" +
+      " data-dismiss='modal' id = 'no'>Nah</button>" +
+        "<button type='button' class='btn btn-primary' data-dismiss='modal' id = 'yes'>Totally!</button>");
+
+//HELPHELPHELPHELP
+    // make a condition that allows the modal if you have already clicked no once
     $(".modal-body").html('Okay then. You have ξ' + player.balance +
       ' in the bank.<br />' + 'Would you like to buy ' +
       game.establishmentStrings[game.currentRoll] + '?');
-      event.preventDefault();
       buyEstablishments(game.currentPlayer);
     })
 }
 
 
 function buyEstablishments(player) {
-  console.log("buyEstablishments is running");
   //Take the steps for the player to buy the property
   $('#yes').on('click', {player: player} ,function(evt) {
-    console.log("Entering yes function. Current player is " + evt.data.player.name)
+    // console.log("Entering yes function. Current player is " + evt.data.player.name)
     evt.data.player.balance -= (game.currentRoll + 1);
     // Use the classes to mark properties as purchased and which player owns it
     // This code seems really chunky. There must be a better way.
@@ -240,27 +282,107 @@ function buyEstablishments(player) {
         (game.activeEstablishment.first()).removeClass('unpurchased');
         (game.activeEstablishment.first()).addClass('purchased' + " " + evt.data.player.id);
     }
+    console.log('switchTurns')
+    switchTurns ();
     evt.data.player.balanceDisplay.html('ξ' + evt.data.player.balance);
   });
+  $('#no').on('click', {player: player} ,function(evt) {
+    console.log(evt);
+    evt.data.player.balance += 0
+    evt.data.player.destinationProgress += 0
+});
 }
 
 
 //Activate the reset button
-game.reset.click(function() {
+game.reset.click (function() {
   console.log("reset")
+
+  //reset values
   game.currentPlayer = null;
   game.player1.balance = 10;
   game.player2.balance = 10;
   game.player1.destinationProgress = 0;
   game.player2.destinationProgress = 0;
-  //will need to strip all the player1 and player2 from the classes
-  //also change classes from purchased to unpurchased
+  updateBalances();
+
+  //reset css and classes of the cards
+  game.allCards.removeClass('purchased player1 player2').addClass('unpurchased');
+  $('.behind-destination').css("background-color", "#655893");
+  $('.behind-establishment').css("background-color", "#438BC6");
+  $('.establishment').css("background-color", "#4D9DE0");
+  $('.destination').css("background-color", "#7768AE");
+
+  //Reset the player announce bars
+  game.announce.css({'color': '#121212', 'border': '2px solid #121212'});
+  // game.player2.announce.css({'color': '#121212', 'border': '2px solid #121212'});
 })
 
-//template for adding key commands to the modal
+///////////////*Debugging Helpers*\\\\\\\\\\\\\\\\\\\\\\\\
+
+//temp function for checking if winGame is working
+function forceWin () {
+  game.player1.balance=33;
+  game.player1.destinationProgress = 5;
+}
+
+function forceLose () {
+  game.player1.balance = 0;
+  game.player1.destinationProgress = 0;
+}
+
+
+///////////////*Experimental Functions*\\\\\\\\\\\\\\\\\\\\\\\\
+
+//templates for adding key commands to the modal
+
 $(document).keydown(function(e){
-    if (e.keyCode == 39) {
-       console.log( "right arrow pressed" );
-       return false;
+    if (e.keyCode == 78) {
+       console.log( "n" );
     }
 });
+
+$(document).keydown(function(e){
+    if (e.keyCode == 13) {
+       console.log( "enter" );
+    }
+});
+
+$(document).keydown(function(e){
+    if (e.keyCode == 27) {
+       console.log( "esc" );
+      //  /main modal look for documentatin about closing/hide
+    }
+});
+
+// want to add hitting the Y key to also act as #yes on click. How to have to event listeners doing the same thing?
+  $(document).keydown(function(e){
+      if (e.keyCode == 89) {
+         console.log( "y" );
+      }
+  });
+
+  $(document).ready(function(){
+      /* Get iframe src attribute value i.e. YouTube video url
+      and store it in a variable */
+      var url = $("#cartoonVideo").attr('https://www.youtube.com/watch?v=gVQWxlRE52Q');
+
+      /* Assign empty url value to the iframe src attribute when
+      modal hide, which stop the video playing */
+      $("#myModal").on('hide.bs.modal', function(){
+          $("#cartoonVideo").attr('src', '');
+      });
+  });
+
+  $("#prompt form").submit(function(e) {
+
+      // close the overlay
+      triggers.eq(1).overlay().close();
+
+      // get user input
+      var input = $("input", this).val();
+
+      // do something with the answer
+      // triggers.eq(1).html(input);
+      console.log(input)
+  });

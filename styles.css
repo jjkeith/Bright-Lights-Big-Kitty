@@ -24,21 +24,6 @@ body {
   border-radius: 5px;
 }
 
-.player2-modal {
-  background-color: #3BB273;
-}
-
-.modal-header {
-  background-color: #E15554;
-  /*player 2 color*/
-}
-
-
-
-/*************************************/
-/*From somewhere, these boxes are inheriting a margin of 16
-and it is screwing up how the text looks*/
-
 #player1 {
   background-color: #E15554;
   /*remember that if you change the color you have to change the color property in js*/
@@ -76,6 +61,11 @@ and it is screwing up how the text looks*/
    position: absolute;
    top: 40px;
    left: 807px;
+ }
+
+
+ #prompt {
+
  }
 
  button {
@@ -142,31 +132,26 @@ p.num {
   font-weight: bolder;
 }
 
+/*Shared card style*/
+.card {
+  box-sizing: border-box;
+  height: 140px;
+  width: 100px;
+  border: 2px solid #333;
+  margin: 20px 20px 0 20px;
+  position: absolute;
+  border-radius: 5px;
+  padding: 5px;
+}
 
 /*Style the front row of cards*/
 
-.card-establishment {
-  box-sizing: border-box;
-  height: 140px;
-  width: 100px;
-  border: 2px solid #333;
+.card.establishment {
   background-color: #4D9DE0;
-  position: absolute;
-  padding: 5px;
-  margin: 20px 20px 0 20px;
-  border-radius: 5px;
 }
 
-.card-destination {
-  box-sizing: border-box;
-  height: 140px;
-  width: 100px;
-  border: 2px solid #333;
+.card.destination {
   background-color: #7768AE;
-  position: absolute;
-  padding: 5px;
-  margin: 20px 20px 0 20px;
-  border-radius: 5px;
 }
 
 /*Position the top row of destination cards*/
@@ -233,30 +218,17 @@ p.num {
   top: 495px
 }
 
-/*Style the back rows of cards*/
-.card-behind-establishment {
-  box-sizing: border-box;
-  height: 140px;
-  width: 100px;
-  border: 2px solid #333;
-  background-color: #438BC6;
-  margin: 20px 20px 0 20px;
-  z-index: -1;
-  position: absolute;
-  border-radius: 5px;
-}
 
-.card-behind-destination {
-  box-sizing: border-box;
-  height: 140px;
-  width: 100px;
-  border: 2px solid #333;
-  background-color: #655893;
-  margin: 20px 20px 0 20px;
+/*Style the back rows of cards*/
+.card.behind-establishment {
+  background-color: #438BC6;
   z-index: -1;
-  position: absolute;
-  border-radius: 5px;
-}
+  }
+
+
+.card.behind-destination {
+  background-color: #655893;
+  z-index: -1;}
 
 /*Position the back row of establishment cards*/
 #estB1 {
@@ -324,4 +296,10 @@ p.num {
 h4.modal-title {
   font-family: 'Sigmar One', cursive;
   letter-spacing: .1em;
+}
+
+
+.current-player{
+  'color': '#E1BC29';
+  'border': '2px solid #E1BC29';
 }
