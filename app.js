@@ -1,5 +1,6 @@
 /*\ primary issues:
-|*| • Can't bring back a modal without hitting the roll button again
+|*| • The rent is not being paid properly
+|*| • Can't buy destination three or higher
 |*| • The winner checker in switchTurns is working as a console.log, but the modal is wonky.
 |*| • If a player owns two properties, they are only getting rent for one.
 |*| • I have the JS to recognize some keycommands, but I don't know how to hook it up to interacting with the modal.
@@ -96,7 +97,7 @@ game.roll.click(function(){
 
   //define the active property, of which there are two copies
   game.activeEstablishment = $('[data-number=' + game.currentRoll +']')
-  game.activeDestination = $('[data-number=' + (game.currentPlayer.destinationProgress + 10) +']')
+  game.activeDestination = $('[data-number=' + (game.currentPlayer.destinationProgress + 9) +']')
 
   // if player doesn't have enough money to buy the property associated with roll.
   if (game.currentPlayer.balance < (game.currentRoll + 1)) {
@@ -226,7 +227,7 @@ function buyDestinations(player) {
 //Populate the modal
   $(".modal-footer").html("<button type='button' class='btn btn-default'" +
     " data-dismiss='modal' id = 'nope'>Nope</button>" +  //////REGARD THE DATA DISMISS
-    "<button type='button' class='btn btn-primary' data-dismiss='modal' id = 'yes'>Let's build a cat empire!</button>");
+    "<button type='button' class='btn btn-primary' data-dismiss='modal' id = 'yes'>Let's build a catpire!</button>");
   $(".modal-body").html('You have ξ' + game.currentPlayer.balance + ' in the bank.<br />'
     + "That's enough to buy a destination!<br />"
     + 'Would you like to buy ' + game.destinationStrings[player.destinationProgress] + '?');
@@ -275,12 +276,10 @@ function buyEstablishments(player) {
     // This code seems really chunky. There must be a better way.
     if ((game.activeEstablishment.first()).hasClass('purchased')) {
         (game.activeEstablishment.last()).css("background-color", evt.data.player.color);
-        (game.activeEstablishment.last()).removeClass('unpurchased');
-        (game.activeEstablishment.last()).addClass('purchased' + " " + evt.data.player.id);
+        (game.activeEstablishment.last()).removeClass('unpurchased').addClass('purchased' + " " + evt.data.player.id);
     } else {
         (game.activeEstablishment.first()).css("background-color", evt.data.player.color);
-        (game.activeEstablishment.first()).removeClass('unpurchased');
-        (game.activeEstablishment.first()).addClass('purchased' + " " + evt.data.player.id);
+        (game.activeEstablishment.first()).removeClass('unpurchased').addClass('purchased' + " " + evt.data.player.id);
     }
     console.log('switchTurns')
     switchTurns ();
