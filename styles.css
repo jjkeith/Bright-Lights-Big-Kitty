@@ -3,7 +3,8 @@
 body {
   font-family: sans-serif;
   text-align: center;
-  color: #121212;
+  color: #333;
+  background-color: #FFF;
 }
 
 #title {
@@ -18,46 +19,60 @@ body {
   height: 80px;
   box-sizing: border-box;
   width: 200px;
-  border: 2px solid black;
+  border: 2px solid #333;
   text-align: center;
   border-radius: 5px;
 }
 
-.modal-header {
-  background-color: #448888;
+.player2-modal {
+  background-color: #3BB273;
 }
+
+.modal-header {
+  background-color: #E15554;
+  /*player 2 color*/
+}
+
+
 
 /*************************************/
 /*From somewhere, these boxes are inheriting a margin of 16
 and it is screwing up how the text looks*/
 
 #player1 {
-  background-color: #448888;
+  background-color: #E15554;
   /*remember that if you change the color you have to change the color property in js*/
   top: 80px;
   left: 30px;
 }
 
  #die {
-   background-color: white;
+   background-color: #FFF;
    top: 80px;
    left: 347.5px;
+   border: 2px solid white;
  }
 
  #player2 {
-   background-color: #b1d46a;
+   background-color: #3BB273;
    /*remember that if you change the color you have to change the color property in js*/
    top: 80px;
    left: 670px;
  }
 
+#roll {
+  background-color: #E1BC29;
+}
+
  #start {
+   background-color: #E1BC29;
    position: absolute;
    top: 40px;
    left: 30px;
  }
 
  #reset {
+   background-color: #E1BC29;
    position: absolute;
    top: 40px;
    left: 807px;
@@ -68,7 +83,7 @@ and it is screwing up how the text looks*/
  }
 
  a {
-   color: black;
+   color: #333;
  }
 
  /*************************************/
@@ -130,20 +145,28 @@ p.num {
 
 /*Style the front row of cards*/
 
-.card {
+.card-establishment {
   box-sizing: border-box;
   height: 140px;
   width: 100px;
-  border: 2px solid #121212;
-  background-color: #e37171;
+  border: 2px solid #333;
+  background-color: #4D9DE0;
   position: absolute;
   padding: 5px;
   margin: 20px 20px 0 20px;
   border-radius: 5px;
 }
 
-.purchased {
-
+.card-destination {
+  box-sizing: border-box;
+  height: 140px;
+  width: 100px;
+  border: 2px solid #333;
+  background-color: #7768AE;
+  position: absolute;
+  padding: 5px;
+  margin: 20px 20px 0 20px;
+  border-radius: 5px;
 }
 
 /*Position the top row of destination cards*/
@@ -210,14 +233,25 @@ p.num {
   top: 495px
 }
 
-
 /*Style the back rows of cards*/
-.card-behind {
+.card-behind-establishment {
   box-sizing: border-box;
   height: 140px;
   width: 100px;
-  border: 2px solid #121212;
-  background-color: #bb4242;
+  border: 2px solid #333;
+  background-color: #438BC6;
+  margin: 20px 20px 0 20px;
+  z-index: -1;
+  position: absolute;
+  border-radius: 5px;
+}
+
+.card-behind-destination {
+  box-sizing: border-box;
+  height: 140px;
+  width: 100px;
+  border: 2px solid #333;
+  background-color: #655893;
   margin: 20px 20px 0 20px;
   z-index: -1;
   position: absolute;
