@@ -187,6 +187,7 @@ function winGame () {
 //Pay rent to the player on every roll
 payRent = function(player) {
 //Player 1 rent
+//could use game.currentPlayer.id, but i want both to get rent
   if ((game.activeEstablishment.first()).hasClass('player1') &&
       (game.activeEstablishment.last()).hasClass('player1')) {
       game.player1.balance += ((game.currentRoll + 1) * 2);
@@ -197,10 +198,10 @@ payRent = function(player) {
         //Because a player can only get rent bonuses for the destinationProgress they already have
       if (game.player1.destinationProgress > game.currentRoll) {
           game.player1.balance += (game.currentRoll + 2);
-          var player1rent = (game.currentRoll + 2);
+          player1rent = (game.currentRoll + 2);
       } else {
           game.player1.balance += (game.currentRoll + 1);
-          var player1rent = (game.currentRoll + 1);
+          player1rent = (game.currentRoll + 1);
       }
   console.warn(">>>>>>Player 1 earnings = " + player1rent)
 
@@ -243,9 +244,14 @@ function buyDestinations(player) {
     evt.data.player.balanceDisplay.html('ξ' + evt.data.player.balance);
     if ((game.activeDestination.first()).hasClass('purchased')) {
         (game.activeDestination.last()).css("background-color", evt.data.player.color);
-        (game.activeDestination.last()).removeClass('unpurchased').addClass('purchased' + " " + evt.data.player.id);
+        (game.activeDestination.last()).removeClass('unpurchased')
+        (game.activeDestination.last()).addClass('purchased' + " " + evt.data.player.id);
+        // (game.activeDestination.last()).removeClass('unpurchased').addClass('purchased' + " " + evt.data.player.id);
     } else {
         (game.activeDestination.first()).css("background-color", evt.data.player.color);
+
+        // (game.activeDestination.first()).removeClass('unpurchased').
+        // (game.activeDestination.first()).addClass('purchased' + " " + evt.data.player.id);
         (game.activeDestination.first()).removeClass('unpurchased').addClass('purchased' + " " + evt.data.player.id);
     }
     console.log('switchTurns')
