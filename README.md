@@ -54,6 +54,7 @@ Hairballerz was created with HTML, CSS, Javascript and jQuery.
 ###Credits
 * Rules and theme: Beatrix Keith
 * Inspiration: Machi Koro © IDW Games, 2015
+* Color scheme from Coolors (https://coolors.co/app/4c9de0-e05353-e0bb28-3ab272-7768ad)
 
 
 ##Future Plans
