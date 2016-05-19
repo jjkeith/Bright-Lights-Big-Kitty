@@ -11,6 +11,9 @@
     <link href='https://fonts.googleapis.com/css?family=Sigmar+One'
       rel='stylesheet' type='text/css'>
 
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700'
+      rel='stylesheet' type='text/css'>
+
     <link rel = "stylesheet"
           href="styles.css"></styles>
     <script src="https://code.jquery.com/jquery-1.12.3.min.js"
@@ -24,14 +27,43 @@
         crossorigin="anonymous"></script>
 
 
-    <title></title>
+    <title>Hairballerz!</title>
   </head>
-  <body>
+
+    <!-- Trigger the modal with a button -->
+    <button type="button" class="btn btn-default btn-sm" id="myBtn"><h4>Name Form</h4></button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="startModal" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4><span class="glyphicon glyphicon-lock"></span> Player 1</h4>
+          </div>
+          <div class="modal-body" >
+            <form role="form">
+              <div class="form-group">
+                <label for="player1"><span class="glyphicon glyphicon-user"></span> Player 1</label>
+                <input type="text" class="form-control" id="player1" placeholder="Player 1">
+              </div>
+              <div class="form-group">
+                <label for="player2"><span class="glyphicon glyphicon-user"></span> Player 2</label>
+                <input type="text" class="form-control" id="player2" placeholder="Player 2">
+              </div>
+                <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span>Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 <div id = 'title'><h1>Hairballerz</h1></div>
 
 <h3><button class='btn btn-default btn-sm' id = 'start'>Start</button></h3>
-<!-- <h3><button class="modalInput" rel="#prompt">Enter Player Names</button></h3> -->
 <h3><button class='btn btn-default btn-sm' id = 'reset'>Reset</button></h3>
 
 <!-- begin console -->
@@ -41,7 +73,6 @@
   <!-- Button trigger modal -->
   <h3><button type="button" class="btn btn-default btn-lg"
   data-toggle="modal" data-target="#myModal" id = 'roll'><a href = '#roll'>Roll</button></a></h3>
-  <!-- <br />⚀ ⚁ ⚂ ⚃ ⚄ ⚅ -->
 </div>
 <div class = 'console-info' id = 'player2'><h3 id = player2Announce>Player 2</h3>
   <h4 id = 'player2BalanceDisplay'></h4></div>
@@ -135,10 +166,10 @@
     <div class="modal-content">
       <div class="modal-header player1-modal">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">You rolled something</h4>
+        <h4 class="modal-title" id="myModalLabel"></h4>
       </div>
       <div class="modal-body">
-        <p>Do you want to buy something?</p>
+        <p></p>
       </div>
       <div class="modal-footer">
         <button type='button' class='btn btn-default' id = 'no'>No</button>
@@ -148,20 +179,7 @@
   </div>
 </div>
 
-<div class="modal" id="prompt">
-  <h2>Please enter Player 1's name</h2>
-    <prompt id = 'name1'>name</name></prompt>
-        <h2>Please enter Player 2's name</h2>
-          <prompt  id = 'name2'>name</name></prompt>
-  <!-- input form. you can press enter too -->
-  <form>
-    <input />
-    <button type="submit"> OK </button>
-    <button type="button" class="close"> Cancel </button>
-  </form>
-  <br />
 
-</div>
 
   <script src="app.js" charset="utf-8"></script>
   </body>

@@ -1,21 +1,17 @@
 /*\ primary issues:
-|*| • switchTurns is broken again
-|*| • The rent is not being paid properly
-|*| • Can't buy destination three or higher
-|*| • The winner checker in switchTurns is working as a console.log, but the modal is wonky.
-|*| • If a player owns two properties, they are only getting rent for one.
+|*| • P2 does not get destination rent bonuses
+|*| • Console highlighting is out of sync
 |*| • I have the JS to recognize some keycommands, but I don't know how to hook it up to interacting with the modal.
 |*| • Prompt players to enter their names and replace "player1" and "player2" with names?
-|*| • How can I make a modal footer method?
-|*| • Something breaks on 6 roll?
+|*| • Have a modal pop up at start
 \*/
 
 var game = {
-  // player object; start each player with 10 cat coins
+  // player object; start each player with 9 cat coins
   player1: {
     name: 'Player 1',
     id: 'player1',
-    balance: 14,
+    balance: 9,
     color: '#E15554',
     balanceDisplay: $('#player1BalanceDisplay'),
     announce: $('.console-info#player1'),
@@ -24,7 +20,7 @@ var game = {
   player2: {
     name: 'Player 2',
     id: 'player2',
-    balance: 10,
+    balance: 9,
     color: '#3BB273',
     balanceDisplay: $('#player2BalanceDisplay'),
     announce: $('.console-info#player2'),
@@ -45,36 +41,87 @@ var game = {
       game.player1.balanceDisplay.html('ξ' + game.player1.balance);
       game.player2.balanceDisplay.html('ξ' + game.player2.balance); },
     allCards: $('.card'),
-}
+
+    //Methods
+    activeConsole: function () {
+      game.currentPlayer.announce.css({'color': '#E1BC29', 'border': '2px solid #E1BC29'}) },
+    inactiveConsole: function () {
+      game.currentPlayer.announce.css({'color': '#333', 'border': '2px solid #333'}) },
+    countAvailableEstablishments: function () {
+      if ( (game.activeEstablishment.first() ).hasClass('unpurchased')
+        && (game.activeEstablishment.last() ).hasClass('unpurchased') ) {
+          return 2
+        } else if ( (game.activeEstablishment.first() ).hasClass('purchased')
+                 && (game.activeEstablishment.last() ).hasClass('purchased') ) {
+            return 0
+        } else {
+            return 1
+        } },
+      countPlayer1OwnedEstablishments: function () {
+        if ( (game.activeEstablishment.first() ).hasClass('player1')
+          && (game.activeEstablishment.last() ).hasClass('player1') ) {
+            return 2;
+          } else if ( (game.activeEstablishment.first() ).hasClass('player1')
+                  || (game.activeEstablishment.last() ).hasClass('player1') ) {
+            return 1;
+          } else {
+            return 0;
+          }
+        },
+        countPlayer2OwnedEstablishments: function () {
+          if ( (game.activeEstablishment.first() ).hasClass('player2')
+            && (game.activeEstablishment.last() ).hasClass('player2') ) {
+              return 2;
+            } else if ( (game.activeEstablishment.first() ).hasClass('player2')
+                    || (game.activeEstablishment.last() ).hasClass('player2') ) {
+              return 1;
+            } else {
+              return 0;
+            }
+          }
+        }
 
 var modal = {
-  header: function() { $(".modal-title").html(game.currentPlayer.name + ' rolled a ' + (game.currentRoll + 1)); },
+  header: function() { $(".modal-title").html(game.currentPlayer.name + ' rolled a <big>'
+    + modal.rollArray[game.currentRoll] + '</big>'); },
+  headerGreeting: function () {  $(".modal-header").html('<h4>Welcome to Hairballerz!</h4>'); },
   headerColor: function () { $(".modal-header").css('background-color', game.currentPlayer.color); },
   headerWin: function () { $(".modal-header").html('<h4>' + game.currentPlayer.name + ' WON!!!! OMG!!</h4>'); },
+  bodyGreeting: function () {$(".modal-body").html("<p>The goal of Hairballerz is to collect establishments that " +
+    "will earn rent for you. Once you start amassing some cat coinz (ξ), you can buy destinations that will increase " +
+    "your establishments' rent and get you closer to being crowned the winner of Hairballrez.</p>" +
+    "<br /><h3>" + game.currentPlayer.name + " goes first!<br /><img src='greeting.gif' alt='greeting cat' height='200'>") },
   bodyEstablishment: function () { $(".modal-body").html('You have ξ' + game.currentPlayer.balance +
-      ' in the bank.<br />' + 'Would you like to buy ' + modal.establishmentStrings[game.currentRoll] + '?'); },
-  bodyDestination: function () { $(".modal-body").html('You have ξ' + game.currentPlayer.balance + ' in the bank.<br />'
-      + "That's enough to buy a destination!<br />" + 'Would you like to buy ' +
-      modal.destinationStrings[game.currentPlayer.destinationProgress] + '?'); },
-  bodyBothPurchased: function () { $(".modal-body").html('Both of the properties for this roll have been purchased.') },
+      ' in the bank.<br />' + 'Would you like to buy ' + modal.establishmentStrings[game.currentRoll] +
+      "?<br /><img src='cat1.gif' alt='space cat' height='200'>"); },
+  bodyDestination: function () { $(".modal-body").html('You have ξ' + game.currentPlayer.balance +
+    ' in the bank.<br />'  + "That's enough to buy a destination!<br />" + 'Would you like to buy the ' +
+      modal.destinationStrings[game.currentPlayer.destinationProgress] + "?<br /><img src='cat2.gif' alt='space cat' height='200'>"); },
+  bodyBothPurchased: function () { $(".modal-body").html('Both of the properties for this roll have been purchased.' +
+      "<br /><img src='cat3.gif' alt='space cat' height='200'>") },
   bodyNotEnoughCash: function () { $(".modal-body").html('You have ξ' + game.currentPlayer.balance +
-      ' in the bank.<br />' + 'Sorry, that is not enough to buy ' + modal.establishmentStrings[game.currentRoll]); },
+      ' in the bank.<br />' + 'Sorry, that is not enough to buy ' + modal.establishmentStrings[game.currentRoll] +
+      "<br /><img src='cat2.gif' alt='space cat' height='200'>"); },
   bodyOkThen: function () { $(".modal-body").html('Okay then. You have ξ' + game.currentPlayer.balance +
-    ' in the bank.<br />' + 'Would you like to buy ' + modal.establishmentStrings[game.currentRoll] + '?'); },
-  bodyWin: function() { $(".modal-body").html("Do you want to play again?<br />"); },
+      ' in the bank.<br />' + 'Would you like to buy ' + modal.establishmentStrings[game.currentRoll] + '?' +
+      "<br /><img src='cat4.gif' alt='space cat' height='200'>"); },
+  bodyWin: function() { $(".modal-body").html("Do you want to play again?<br /><img src='winner.gif' alt='winner cat' height='200'>"); },
+  footerYay: function () {  $(".modal-footer").html("<button type='button'" +
+      "class='btn btn-default' data-dismiss='modal' id = 'oh'>yay!</button>"); },
   footerOhWell: function () {  $(".modal-footer").html("<button type='button'" +
       "class='btn btn-default' data-dismiss='modal' id = 'oh'>Oh well</button>"); },
   footerNah: function () { $(".modal-footer").html("<button type='button' class='btn btn-default'" +
       " data-dismiss='null' id = 'nah'>Nah</button>" + "<button type='button' class='btn" +
       " btn-primary' data-dismiss='modal' id = 'yes'>Totally!</button>"); },
   footerNope: function() { $(".modal-footer").html("<button type='button' class='btn btn-default'" +
-      " data-dismiss='modal' id = 'nope'>Nope</button>" +
-      "<button type='button' class='btn btn-primary' data-dismiss='modal' id = 'yes'>Let's build an empire!</button>"); },
+      " data-dismiss='modal' id = 'nope'>Nope</button><button type='button'" +
+      " class='btn btn-primary' data-dismiss='modal' id = 'yes'>Let's build an empire!</button>"); },
   ohClick: function () { console.log( "switchTurns" );
         switchTurns();
         $( "#oh" ).on( "click" ); },
 
   //dialog string variables
+  rollArray: ['⚀', '⚁', '⚂', '⚃', '⚄', '⚅'],
   establishmentStrings: ["The Veterinary Offices of Katz & Nuzzle for ξ1",
     "Tuna 'R' Us for ξ2",
     "Purrfect Coif Groomer for ξ3",
@@ -105,8 +152,21 @@ game.start.click(function() {
     game.currentPlayer = game.player2;
     console.log("Player 2's turn");
   }
-  return game.currentPlayer
+  mondal.header();
+  modal.headerGreeting();
+  modal.headerColor();
+  modal.bodyGreeting();
+  modal.footerYay();
+  $('#myModal').modal('show');
+  return game.currentPlayer;
 })
+
+$(document).ready(function(){
+    $("#myBtn").click(function(){
+        $("#startModal").modal();
+    });
+});
+
 
 ///////////////*Major Roll Function*\\\\\\\\\\\\\\\\\\\\\\\\
 
@@ -118,10 +178,10 @@ game.roll.click(function() {
   }
 
   //create a die roll from 0 to 5 that coordinates with array indeces.
-  game.currentRoll = ( Math.floor(Math.random() * 6) );
+  game.currentRoll =  Math.floor(Math.random() * modal.rollArray.length);
   console.log(game.currentPlayer.name + ' rolled a ' + (game.currentRoll + 1));
 
-  //define the active property, of which there are two copies
+  //define the active property, of which there are multiple copies
   game.activeEstablishment = $('[data-number=' + game.currentRoll +']')
   game.activeDestination = $('[data-number=' + (game.currentPlayer.destinationProgress + 10) +']')
 
@@ -129,38 +189,30 @@ game.roll.click(function() {
   payRent(game.currentPlayer);
   game.updateBalances();
 
-  //Populate the modal's header and footer
+  //Populate the modal
   modal.headerColor();
   modal.header();
   modal.footerNah();
   modal.bodyEstablishment(); //make est the default message
 
-  // if player doesn't have enough money to buy the property associated with roll.
-  if ( game.currentPlayer.balance < (game.currentRoll + 1) ) {
-    modal.footerOhWell();
-    modal.bodyNotEnoughCash();
-    modal.ohClick(); // includes switchTurns
-
-  // if the player has enough money to buy establishments, but not enough to buy destinations
-  } else if ( ( (game.currentRoll + 1) <= game.currentPlayer.balance) &&
-      (game.currentPlayer.balance < (game.currentPlayer.destinationProgress * 4)  + 11) ) {
-
-    // ensure that one of the properties associated with the roll is available
-    if ( (game.activeEstablishment.first() ).hasClass('unpurchased')
-      || (game.activeEstablishment.last() ).hasClass('unpurchased') ) {
+  if ( game.currentPlayer.balance > (game.currentPlayer.destinationProgress * 4) + 10 )  {
+      buyDestinations(game.currentPlayer);
+  } else if ( game.countAvailableEstablishments() > 0 ) {
+      if ( game.currentPlayer.balance > (game.currentRoll + 1) ) {
         buyEstablishments(game.currentPlayer);
-
-      } else if ( (game.activeEstablishment.first() ).hasClass('purchased')
-             && (game.activeEstablishment.last() ).hasClass('purchased') ) {
-          modal.footerOhWell();
-          modal.bodyBothPurchased();
-          modal.ohClick(); // includes switchTurns
-        }
-    //if the player has enough money to buy the next destination property
-    } else if  ((game.currentPlayer.balance) > (game.currentPlayer.destinationProgress * 4) + 11) {
-        buyDestinations(game.currentPlayer);
-    }
-    game.updateBalances();
+      } else {
+        modal.header();
+        modal.footerOhWell();
+        modal.bodyNotEnoughCash();
+        modal.ohClick(); // includes switchTurns
+      }
+  } else if ( game.countAvailableEstablishments() === 0 ){
+    mondal.header();
+    modal.footerOhWell();
+    modal.bodyBothPurchased();
+    modal.ohClick(); // includes switchTurns
+  }
+  game.updateBalances();
 });
 
 ///////////////*Helper Functions*\\\\\\\\\\\\\\\\\\\\\\\\
@@ -168,21 +220,16 @@ game.roll.click(function() {
 // Switch players, highlight active players
 //make the modal header match the player's color
 function  switchTurns () {
-  if ( game.currentPlayer.destinationProgress == 6 ) {
-    console.log(game.currentPlayer.name + ' WON!!!! OMG!!')
-    //winGame not currently launching
+  game.inactiveConsole();
+  if ( game.currentPlayer.destinationProgress == modal.rollArray.length ) {
     winGame();
   } else if ( game.currentPlayer == game.player1 ) {
     game.currentPlayer = game.player2;
-    game.player2.announce.css({'color': '#E1BC29', 'border': '2px solid #E1BC29'});
-    game.player1.announce.css({'color': '#121212', 'border': '2px solid #121212'});
   } else {
     game.currentPlayer = game.player1;
-    game.player1.announce.css({'color': '#E1BC29', 'border': '2px solid #E1BC29'});
-    game.player2.announce.css({'color': '#121212', 'border': '2px solid #121212'});
   }
+  game.activeConsole();
 }
-
 
 function winGame () {
   $('#myModal').modal('show');
@@ -202,48 +249,34 @@ function winGame () {
 payRent = function(player) {
 //Player 1 rent
   console.warn('1 bal before: ' + game.player1.balance + ' ; 2 bal before: ' + game.player2.balance);
-  if ( (game.activeEstablishment.first() ).hasClass('player1') &&
-       (game.activeEstablishment.last() ).hasClass('player1') ) {
-      game.player1.balance += ( 2 * ( game.currentRoll + 1 ) );
-  } else if ( game.activeEstablishment.first().hasClass('player1') ||
-      (game.activeEstablishment.last() ).hasClass('player1') ) {
-      //Because a player can only get rent bonuses for the destinationProgress they already have
-      if ( game.player1.destinationProgress > game.currentRoll ) {
-        game.player1.balance += (game.currentRoll + 2);
-    } else {
-        game.player1.balance += game.currentRoll + 1;
-    }
+  if ( game.player1.destinationProgress <= game.currentRoll ) {
+    game.player1.balance += ( game.currentRoll + 1 ) * (game.countPlayer1OwnedEstablishments () )
+  } else {
+    game.player1.balance += ( game.currentRoll + 2) * (game.countPlayer1OwnedEstablishments() )
   }
 
-//Player 2 rent
-  if ( (game.activeEstablishment.first() ).hasClass('player2') &&
-       (game.activeEstablishment.last() ).hasClass('player2') ) {
-    game.player2.balance += (game.currentRoll + 1) * 2;
-  } else if ( (game.activeEstablishment.first() ).hasClass('player2') ||
-            (game.activeEstablishment.last() ).hasClass('player2') ) {
-      if ( game.player2.destinationProgress > game.currentRoll ) {
-          game.player2.balance += game.currentRoll + 2;
-      } else {
-          game.player2.balance += game.currentRoll + 1;
-      }
+//Player2 rent
+  if ( game.player2.destinationProgress <= game.currentRoll ) {
+    game.player2.balance += ( game.currentRoll + 1 ) * (game.countPlayer2OwnedEstablishments () )
+  } else {
+    game.player2.balance += ( game.currentRoll + 2) * (game.countPlayer2OwnedEstablishments() )
   } console.warn('1 bal after : ' + game.player1.balance + ' ; 2 bal after : ' + game.player2.balance);
 }
 
 //guide the player through buying a destination
 function buyDestinations(player) {
+
 //Populate the modal
-  modal.footerNope();
+  modal.header();
   modal.bodyDestination();
+  modal.footerNope();
 
   //Take the steps for the player to buy the property or not
   $('#yes').on('click', {player: player} ,function(evt) {
-        console.log('Before ' + evt.data.player.balance)
         evt.data.player.balance -= ((evt.data.player.destinationProgress * 4) + 10);
-        console.log('After ' + evt.data.player.balance)
-    evt.data.player.destinationProgress += 1;
-        console.log("Destination progress = " + game.player2.destinationProgress + " for player2")
-        console.log("Destination progress = " + game.player1.destinationProgress + " for player1")
-    evt.data.player.balanceDisplay.html('ξ' + evt.data.player.balance);
+        game.updateBalances();
+        evt.data.player.destinationProgress += 1;
+
     if ( game.activeDestination.first().hasClass('purchased') ) {
         (game.activeDestination.last() ).css("background-color", evt.data.player.color);
         (game.activeDestination.last() ).removeClass('unpurchased').addClass('purchased' + " " + evt.data.player.id);
@@ -255,17 +288,24 @@ function buyDestinations(player) {
     switchTurns ();
     });
 
+//if the player declines the destination, offer the establishment corresponding
+//to the role (if available)
   $('#nope').on('click', {player: player} ,function(evt) {
     modal.footerNah();
-
-    // if player says no to the destination, offer the establishment for roll
-    modal.bodyOkThen();
-    buyEstablishments(game.currentPlayer);
+    if ( game.countAvailableEstablishments() > 0 ) {
+      modal.bodyOkThen();
+      buyEstablishments(game.currentPlayer);
+    }
+    else {
+      modal.bodyBothPurchased();
+      modal.footerOhWell();
+      modal.ohClick();
+    }
     })
 }
 
 function buyEstablishments(player) {
-  //Take the steps for the player to buy the property
+  console.log('buying establishment');
   $('#yes').on('click', {player: player} ,function(evt) {
     evt.data.player.balance -= (game.currentRoll + 1);
 
@@ -279,15 +319,12 @@ function buyEstablishments(player) {
     }
     console.log('switchTurns')
     switchTurns ();
-    // evt.data.player.balanceDisplay.html( 'ξ' + evt.data.player.balance );
     game.updateBalances();
   });
 
   $('#nah').on('click', {player: player} ,function(evt) {
     $('#myModal').modal('hide');
     switchTurns();
-    // evt.data.player.balance += 0
-    // evt.data.player.destinationProgress += 0
   });
 }
 
@@ -372,15 +409,3 @@ function forceLose () {
 //       });
 //   });
 //
-//   $("#prompt form").submit(function(e) {
-//
-//       // close the overlay
-//       triggers.eq(1).overlay().close();
-//
-//       // get user input
-//       var input = $("input", this).val();
-//
-//       // do something with the answer
-//       // triggers.eq(1).html(input);
-//       console.log(input)
-//   });
