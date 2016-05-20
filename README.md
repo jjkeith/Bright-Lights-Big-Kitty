@@ -40,7 +40,9 @@ The idea for Hairballerz came from my seven-year-old daughter, Beatrix. After pl
 
 ###Screenshots
 ![] (screenshot1.jpg)
+The game at start.
 ![] (screenshot2.jpg)
+A modal with some properties already purchased.
 
 ###Development
 My original plan for laying out the screen was to put player info at the bottom of the page as below. However, I switched it around because I felt that having that information at the top was more intuitive.
@@ -51,6 +53,9 @@ My original plan for laying out the screen was to put player info at the bottom 
 ###Technology
 Hairballerz was created with HTML, CSS, Javascript, jQuery, and Bootstrap. The game board remains static, with colors changing when properties are purchased. Modals guide the player through starting the game and making decisions about property purchasing.
 
+###Known Bugs and Issues
+* The modal covers Player 2's balance so the user can't see when it blinks to indicate that rent has been earned.
+
 ###Credits
 * Rules and theme: Beatrix Keith
 * Inspiration: Machi Koro © IDW Games, 2015
@@ -60,5 +65,4 @@ Hairballerz was created with HTML, CSS, Javascript, jQuery, and Bootstrap. The g
 * Starter cards that are dealt at random and change the occasions or properties upon which rent can be collected
 * Include an option to play against the computer
 * Add key commands that provide input to the modal
-* Add popovers on each property card to provide more information about each card
 * For each establishment, make four cards available and accordingly raise the prices on the destinations

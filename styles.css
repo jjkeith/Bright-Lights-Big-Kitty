@@ -167,9 +167,8 @@ p.num {
 
 a[title] {
   font-family: 'Open Sans', sans-serif;
-  font-size: 11px;
+  font-size: 14px;
 }
-
 
 .popover {
   width: 200px;
@@ -177,7 +176,7 @@ a[title] {
 
 .popover-title {
   font-family: 'Open Sans', sans-serif;
-  font-size: 13px;
+  font-size: 14px;
   padding: 2px 30px;
   background-color: #E1BC29;
   font-weight: 700;
@@ -185,7 +184,7 @@ a[title] {
 }
 
 .popover-content {
-  font-size: 11px;
+  font-size: 13px;
   padding: 2px 3px;
   font-weight: 400;
   text-align: center;
