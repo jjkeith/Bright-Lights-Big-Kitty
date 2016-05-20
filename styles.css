@@ -191,6 +191,15 @@ a[title] {
 
 }
 
+.footer {
+  font-size: 9px;
+  display: none;
+  top: 600px;
+  left: 30px
+  color: #111;
+}
+
+
 /*Shared card style*/
 .card {
   box-sizing: border-box;

@@ -188,7 +188,7 @@ function startGame () {
     game.currentPlayer = game.player2;
     console.log("Player 2's turn");
   }
-
+  $('#myModal').modal('show');
   modal.headerColor();
   modal.bodyGreetingPage2();
   modal.footerYay()
