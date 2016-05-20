@@ -10,7 +10,7 @@ The idea for Hairballerz came from my seven-year-old daughter, Beatrix. After pl
 
 #####Cat Establishments
 * Players may obtain up to two of each.
-* Players can only buy the card that corresponds with their role.
+* Players can only buy the card that corresponds with their roll.
 * When a player obtains a property, the card changes to the player's color and the player begins making rent whenever the card's number is rolled.
 
 1. The Veterinary Offices of Katz & Nuzzle - Costs 1ξ and earns 1ξ when a 1 is rolled.
