@@ -4,7 +4,7 @@
 **Hairballerz is a cat-themed real estate card game. The goal of Hairballerz is to collect establishments that will earn rent. Once enough cat coinz(ξ) is collected in rent, players can invest in destinations that will increase their establishments' rent and get them closer to winning the title of Chief Hairballer.**
 
 ###Inspiration
-The idea for Hairballerz came from my seven-year-old daughter, Beatrix. After playing Machi Koro, a much more complicated Japanese card game that, sadly, has little to nothing to do with cats. She and I came up with a game that is simpler and is quicker to play... and also has 500% more cats. The original game was made on paper, but her first-grade friends found keeping score too difficult, so I sought to make a Javascript-based version.
+The idea for Hairballerz came from my seven-year-old daughter, Beatrix, after playing Machi Koro, a much more complicated Japanese card game that, sadly, has little to nothing to do with cats. She and I came up with a game that is simpler and is quicker to play... and also has 500% more cats. The original game was made on paper, but her first-grade friends found keeping score too difficult, so I sought to make a Javascript-based version.
 
 ###Instructions
 
