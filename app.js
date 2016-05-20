@@ -1,6 +1,10 @@
-/*\ primary issues:
-|*| • currentPlayer highlighting is not affecting the game.currentPlayer.scoreBox
-|*| • Attempts to make money flash yellow when it changs are not going well
+/*\ Hairballerz -- by JJ Keith, 2016
+|*| Hairballerz is a cat-themed real estate card game. The goal of Hairballerz
+|*| is to collect establishments that will earn rent. Once enough cat coinz(ξ)
+|*| is collected in rent, players can invest in destinations that will increase
+|*| their establishments' rent and get them closer to winning the title of Chief
+|*| Hairballer.
+|*|
 \*/
 
 var game = {
@@ -188,7 +192,8 @@ function startGame () {
     game.currentPlayer = game.player2;
     console.log("Player 2's turn");
   }
-  $('#myModal').modal('show');
+
+$('#myModal').modal('show');
   modal.headerColor();
   modal.bodyGreetingPage2();
   modal.footerYay()
