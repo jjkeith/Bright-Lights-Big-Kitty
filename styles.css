@@ -7,12 +7,14 @@ body {
   background-color: #FFF;
 }
 
+
 #title {
   position: absolute;
   top: 0;
   left: 255px;
   margin: 0 auto;
 }
+
 
 .console-info {
   position: absolute;
@@ -24,12 +26,14 @@ body {
   border-radius: 5px;
 }
 
-#player1 {
+
+.player1 {
   background-color: #E15554;
   /*remember that if you change the color you have to change the color property in js*/
   top: 80px;
   left: 30px;
 }
+
 
  #die {
    background-color: #FFF;
@@ -38,43 +42,55 @@ body {
    border: 2px solid white;
  }
 
- #player2 {
+
+ .player2 {
    background-color: #3BB273;
    /*remember that if you change the color you have to change the color property in js*/
    top: 80px;
    left: 670px;
  }
 
+
 #roll {
   background-color: #E1BC29;
+  border: 2px solid #333;
 }
+
 
  #start {
    background-color: #E1BC29;
    position: absolute;
-   top: 40px;
+   top: 30px;
    left: 30px;
+   border: 2px solid #333;
  }
+
 
  #reset {
    background-color: #E1BC29;
    position: absolute;
-   top: 40px;
-   left: 807px;
- }
-
-
- #prompt {
-
- }
-
- button {
+   top: 30px;
+   left: 773px;
    border: 2px solid #333;
  }
+
 
  a {
    color: #333;
  }
+
+
+ .btn-block {
+     display: block;
+     width: 25%;
+     text-align: center;
+ }
+
+ .modal-header {
+    background-color: #E1BC29;
+ }
+
+
 
  /*************************************/
 
@@ -86,12 +102,14 @@ body {
    margin: 0 auto;
  }
 
+
  #establishments-instrux {
    position: absolute;
    top: 215px;
    left: 150px;
    margin: 0 auto;
  }
+
 
 #destinations {
    position: absolute;
@@ -100,6 +118,7 @@ body {
    margin: 0 auto;
  }
 
+
  #destinations-instrux {
    position: absolute;
    top: 470px;
@@ -107,15 +126,18 @@ body {
    margin: 0 auto;
  }
 
+
 h1 {
   font-family: 'Sigmar One', cursive;
   letter-spacing: .3em;
 }
 
+
 h2 {
   font-family: 'Sigmar One', cursive;
   letter-spacing: .1em;
 }
+
 
 h3 {
   font-family: 'Sigmar One', cursive;
@@ -123,14 +145,17 @@ h3 {
   padding: 0;
 }
 
+
 p {
   font-size: 14px;
 }
+
 
 p.num {
   font-size: 24px;
   font-weight: bolder;
 }
+
 
 /*Shared card style*/
 .card {
@@ -144,11 +169,13 @@ p.num {
   padding: 5px;
 }
 
+
 /*Style the front row of cards*/
 
 .card.establishment {
   background-color: #4D9DE0;
 }
+
 
 .card.destination {
   background-color: #7768AE;
@@ -156,35 +183,42 @@ p.num {
 
 /*Position the top row of destination cards*/
 
+
 #estA1 {
   left: 30px;
   top: 240px
 }
+
 
 #estA2 {
   left: 175px;
   top: 240px
 }
 
+
 #estA3 {
   left: 320px;
   top: 240px
 }
+
 
 #estA4 {
   left: 465px;
   top: 240px
 }
 
+
 #estA5 {
   left: 610px;
   top: 240px
 }
 
+
 #estA6 {
   left: 755px;
   top: 240px
 }
+
 
 /*Position the top row of destination cards*/
 
@@ -193,25 +227,30 @@ p.num {
   top: 495px
 }
 
+
 #destA2 {
   left: 175px;
   top: 495px
 }
+
 
 #destA3 {
   left: 320px;
   top: 495px
 }
 
+
 #destA4 {
   left: 465px;
   top: 495px
 }
 
+
 #destA5 {
   left: 610px;
   top: 495px
 }
+
 
 #destA6 {
   left: 755px;
@@ -220,6 +259,7 @@ p.num {
 
 
 /*Style the back rows of cards*/
+
 .card.behind-establishment {
   background-color: #438BC6;
   z-index: -1;
@@ -230,36 +270,44 @@ p.num {
   background-color: #655893;
   z-index: -1;}
 
+
 /*Position the back row of establishment cards*/
+
 #estB1 {
   left: 10px;
   top: 225px
 }
+
 
 #estB2 {
   left: 155px;
   top: 225px
 }
 
+
 #estB3 {
   left: 300px;
   top: 225px
 }
+
 
 #estB4 {
   left: 445px;
   top: 225px
 }
 
+
 #estB5 {
   left: 590px;
   top: 225px
 }
 
+
 #estB6 {
   left: 735px;
   top: 225px
 }
+
 
 /*Position the back row of destination cards*/
 #destB1 {
@@ -267,25 +315,30 @@ p.num {
     top: 480px
 }
 
+
 #destB2 {
   left: 155px;
   top: 480px
 }
+
 
 #destB3 {
   left: 300px;
   top: 480px
 }
 
+
 #destB4 {
   left: 445px;
   top: 480px
 }
 
+
 #destB5 {
   left: 590px;
   top: 480px
 }
+
 
 #destB6 {
   left: 735px;
@@ -300,6 +353,6 @@ h4.modal-title {
 
 
 .current-player{
-  'color': '#E1BC29';
-  'border': '2px solid #E1BC29';
+  'color': #E1BC29;
+  'border': 2px solid #E1BC29;
 }

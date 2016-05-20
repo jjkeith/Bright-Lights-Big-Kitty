@@ -30,52 +30,25 @@
     <title>Hairballerz!</title>
   </head>
 
-    <!-- Trigger the modal with a button -->
-    <button type="button" class="btn btn-default btn-sm" id="myBtn"><h4>Name Form</h4></button>
+    <div id = 'title'><h1>Hairballerz</h1></div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="startModal" role="dialog">
-      <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4><span class="glyphicon glyphicon-lock"></span> Player 1</h4>
-          </div>
-          <div class="modal-body" >
-            <form role="form">
-              <div class="form-group">
-                <label for="player1"><span class="glyphicon glyphicon-user"></span> Player 1</label>
-                <input type="text" class="form-control" id="player1" placeholder="Player 1">
-              </div>
-              <div class="form-group">
-                <label for="player2"><span class="glyphicon glyphicon-user"></span> Player 2</label>
-                <input type="text" class="form-control" id="player2" placeholder="Player 2">
-              </div>
-                <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span>Submit</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-<div id = 'title'><h1>Hairballerz</h1></div>
-
-<h3><button class='btn btn-default btn-sm' id = 'start'>Start</button></h3>
-<h3><button class='btn btn-default btn-sm' id = 'reset'>Reset</button></h3>
+<h3><button class='btn btn-default btn-lg' id = 'start'>Start</button></h3>
+<h3><button class='btn btn-default btn-lg' id = 'reset'>Reset</button></h3>
 
 <!-- begin console -->
-<div class = 'console-info' id = 'player1'><h3 id = player1Announce>Player 1</h3>
-  <h4 id = 'player1BalanceDisplay'></h4></div>
+<div class = 'console-info player1'><h3 id = 'player1Announce'>Player 1</h3>
+  <h4 id = 'player1BalanceDisplay'></h4>
+</div>
+
 <div class = 'console-info' id = 'die'>
   <!-- Button trigger modal -->
   <h3><button type="button" class="btn btn-default btn-lg"
   data-toggle="modal" data-target="#myModal" id = 'roll'><a href = '#roll'>Roll</button></a></h3>
 </div>
-<div class = 'console-info' id = 'player2'><h3 id = player2Announce>Player 2</h3>
-  <h4 id = 'player2BalanceDisplay'></h4></div>
+
+<div class = 'console-info player2' ><h3 id = 'player2Announce'>Player 2</h3>
+   <h4 id = 'player2BalanceDisplay'></h4>
+ </div>
 
 
 <!-- begin first row of cards -->
@@ -164,7 +137,7 @@
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header player1-modal">
+      <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel"></h4>
       </div>

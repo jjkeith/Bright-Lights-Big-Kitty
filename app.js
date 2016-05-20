@@ -1,9 +1,8 @@
 /*\ primary issues:
-|*| • P2 does not get destination rent bonuses
-|*| • Console highlighting is out of sync
+|*| • currentPlayer highlighting is not looking it's best
+|*| • Reset button is not 100%
+|*| • Attempts to make money flash yellow when it changs are not going well
 |*| • I have the JS to recognize some keycommands, but I don't know how to hook it up to interacting with the modal.
-|*| • Prompt players to enter their names and replace "player1" and "player2" with names?
-|*| • Have a modal pop up at start
 \*/
 
 var game = {
@@ -14,7 +13,7 @@ var game = {
     balance: 9,
     color: '#E15554',
     balanceDisplay: $('#player1BalanceDisplay'),
-    announce: $('.console-info#player1'),
+    announce: $('#player1Announce'),
     destinationProgress: 0
   },
   player2: {
@@ -23,7 +22,7 @@ var game = {
     balance: 9,
     color: '#3BB273',
     balanceDisplay: $('#player2BalanceDisplay'),
-    announce: $('.console-info#player2'),
+    announce: $('#player2Announce'),
     destinationProgress: 0
   },
 
@@ -31,22 +30,40 @@ var game = {
     start: $('#start'),
     reset: $('#reset'),
     roll: $('#roll'),
+    submit: $('#submit'),
 
     //gameplay variables
     currentPlayer: null,
     currentRoll: null,
     activeEstablishment: null,
     activeDestination: null,
-    updateBalances: function () {
-      game.player1.balanceDisplay.html('ξ' + game.player1.balance);
-      game.player2.balanceDisplay.html('ξ' + game.player2.balance); },
+
     allCards: $('.card'),
 
     //Methods
+
+    //This function is meant to flash the balance in yellow when it changes. Not working.
+    updateBalances: function () {
+      var p1BalBefore = game.player1.balance;
+      var p2BalBefore = game.player2.balance;
+      game.player1.balanceDisplay.html('ξ' + game.player1.balance);
+      game.player2.balanceDisplay.html('ξ' + game.player2.balance);
+      var p1BalAfter = game.player1.balance;
+      var p2BalAfter = game.player2.balance;
+      if (p1BalBefore != p1BalAfter) {
+        setTimeout(function(){
+            game.player1.balanceDisplay.css({'color': '#E1BC29'});
+          }, 1000);
+      } else if (p2BalBefore != p2BalAfter) {
+        setTimeout(function(){
+            game.player1.balanceDisplay.css({'color': '#E1BC29'});
+          }, 1000);
+      }
+    },
     activeConsole: function () {
-      game.currentPlayer.announce.css({'color': '#E1BC29', 'border': '2px solid #E1BC29'}) },
+      game.currentPlayer.announce.css({'color': '#E1BC29'}) },
     inactiveConsole: function () {
-      game.currentPlayer.announce.css({'color': '#333', 'border': '2px solid #333'}) },
+      game.currentPlayer.announce.css({'color': '#333'}) },
     countAvailableEstablishments: function () {
       if ( (game.activeEstablishment.first() ).hasClass('unpurchased')
         && (game.activeEstablishment.last() ).hasClass('unpurchased') ) {
@@ -82,21 +99,26 @@ var game = {
         }
 
 var modal = {
-  header: function() { $(".modal-title").html(game.currentPlayer.name + ' rolled a <big>'
-    + modal.rollArray[game.currentRoll] + '</big>'); },
-  headerGreeting: function () {  $(".modal-header").html('<h4>Welcome to Hairballerz!</h4>'); },
+  header: function() { $(".modal-title").html('<h2>' + game.currentPlayer.name + ' rolled a <big>'
+    + modal.rollArray[game.currentRoll] + '</big></h2>'); },
+  headerPurge: function() { $(".modal-title").html(''); },
   headerColor: function () { $(".modal-header").css('background-color', game.currentPlayer.color); },
   headerWin: function () { $(".modal-header").html('<h4>' + game.currentPlayer.name + ' WON!!!! OMG!!</h4>'); },
-  bodyGreeting: function () {$(".modal-body").html("<p>The goal of Hairballerz is to collect establishments that " +
+  bodyGreeting: function () {$(".modal-body").html("<h4>Please enter your names.</h4><form role='form'><div class='form-group'>" +
+    "<label for='player-1'>Player 1</label><input type='text' class='form-control' id='player1Input' placeholder='Player 1'>" +
+    "<label for='player-2'>Player 2</label><input type='text' class='form-control' id='player2Input' placeholder='Player 2'>" +
+    "</div><center><button type='submit' class='btn btn-neutral' id = 'submit'></span>Submit</button></center></form>" +
+    "<br /><img src='greeting.gif' alt='greeting cat' height='200'>") },
+  bodyGreetingPage2: function () {$(".modal-body").html("<p>The goal of Hairballerz is to collect establishments that " +
     "will earn rent for you. Once you start amassing some cat coinz (ξ), you can buy destinations that will increase " +
-    "your establishments' rent and get you closer to being crowned the winner of Hairballrez.</p>" +
-    "<br /><h3>" + game.currentPlayer.name + " goes first!<br /><img src='greeting.gif' alt='greeting cat' height='200'>") },
+    "your establishments' rent and get you closer to winning the title of Chief Hairballerz.</p>" +
+    "<br /><h3>" + game.currentPlayer.name + " goes first!<br /><img src='cat5.gif' alt='space cat' height='200'>") },
   bodyEstablishment: function () { $(".modal-body").html('You have ξ' + game.currentPlayer.balance +
       ' in the bank.<br />' + 'Would you like to buy ' + modal.establishmentStrings[game.currentRoll] +
       "?<br /><img src='cat1.gif' alt='space cat' height='200'>"); },
   bodyDestination: function () { $(".modal-body").html('You have ξ' + game.currentPlayer.balance +
     ' in the bank.<br />'  + "That's enough to buy a destination!<br />" + 'Would you like to buy the ' +
-      modal.destinationStrings[game.currentPlayer.destinationProgress] + "?<br /><img src='cat2.gif' alt='space cat' height='200'>"); },
+      modal.destinationStrings[game.currentPlayer.destinationProgress] + "?<br /><img src='cat4.gif' alt='space cat' height='200'>"); },
   bodyBothPurchased: function () { $(".modal-body").html('Both of the properties for this roll have been purchased.' +
       "<br /><img src='cat3.gif' alt='space cat' height='200'>") },
   bodyNotEnoughCash: function () { $(".modal-body").html('You have ξ' + game.currentPlayer.balance +
@@ -104,10 +126,10 @@ var modal = {
       "<br /><img src='cat2.gif' alt='space cat' height='200'>"); },
   bodyOkThen: function () { $(".modal-body").html('Okay then. You have ξ' + game.currentPlayer.balance +
       ' in the bank.<br />' + 'Would you like to buy ' + modal.establishmentStrings[game.currentRoll] + '?' +
-      "<br /><img src='cat4.gif' alt='space cat' height='200'>"); },
+      "<br /><img src='cat5.gif' alt='space cat' height='200'>"); },
   bodyWin: function() { $(".modal-body").html("Do you want to play again?<br /><img src='winner.gif' alt='winner cat' height='200'>"); },
   footerYay: function () {  $(".modal-footer").html("<button type='button'" +
-      "class='btn btn-default' data-dismiss='modal' id = 'oh'>yay!</button>"); },
+      "class='btn btn-default' data-dismiss='modal' id = 'yay'>yay!</button>"); },
   footerOhWell: function () {  $(".modal-footer").html("<button type='button'" +
       "class='btn btn-default' data-dismiss='modal' id = 'oh'>Oh well</button>"); },
   footerNah: function () { $(".modal-footer").html("<button type='button' class='btn btn-default'" +
@@ -116,6 +138,7 @@ var modal = {
   footerNope: function() { $(".modal-footer").html("<button type='button' class='btn btn-default'" +
       " data-dismiss='modal' id = 'nope'>Nope</button><button type='button'" +
       " class='btn btn-primary' data-dismiss='modal' id = 'yes'>Let's build an empire!</button>"); },
+  footerBlank: function() { $(".modal-footer").html(""); },
   ohClick: function () { console.log( "switchTurns" );
         switchTurns();
         $( "#oh" ).on( "click" ); },
@@ -140,32 +163,58 @@ var modal = {
 //display balances at start of game
 game.updateBalances();
 
-//Activate the start button and randomize a starting player
-game.start.click(function() {
+greetingModal();
+
+//Enable the start button
+$('body').on("click", game.submit, function() {
+});
+
+//Bring up a form where users can input their names
+function greetingModal() {
+  game.start.click(function() {
   console.log("start")
   game.updateBalances();
+  modal.bodyGreeting();
+  modal.footerBlank();
+  $('#myModal').modal('show');
+  $('#submit').on('click', function(evt) {
+  game.player1.name = $('#player1Input').val();
+  game.player2.name = $('#player2Input').val();
+  game.player1.announce.html('<h3>'+ game.player1.name + '</h3>');
+  game.player2.announce.html('<h3>'+ game.player2.name + '</h3>');
+  startGame()
+  });
+})
+};
+
+function startGame () {
+  //update the game with the players' name
+    game.updateBalances();
+
+  //choose a first player
   var random = Math.random();
   if (random < .5) {
     game.currentPlayer = game.player1;
     console.log("Player 1's turn");
-  } else {
+  } else  {
     game.currentPlayer = game.player2;
     console.log("Player 2's turn");
   }
-  mondal.header();
-  modal.headerGreeting();
-  modal.headerColor();
-  modal.bodyGreeting();
-  modal.footerYay();
-  $('#myModal').modal('show');
-  return game.currentPlayer;
-})
 
-$(document).ready(function(){
-    $("#myBtn").click(function(){
-        $("#startModal").modal();
-    });
-});
+  modal.headerColor();
+  modal.bodyGreetingPage2();
+  modal.footerYay()
+
+  $('#yay').on('click', function(evt) {
+    startGame()
+    modal.header();
+    $('#myModal').modal('hide');
+  });
+}
+
+
+
+
 
 
 ///////////////*Major Roll Function*\\\\\\\\\\\\\\\\\\\\\\\\
@@ -198,7 +247,7 @@ game.roll.click(function() {
   if ( game.currentPlayer.balance > (game.currentPlayer.destinationProgress * 4) + 10 )  {
       buyDestinations(game.currentPlayer);
   } else if ( game.countAvailableEstablishments() > 0 ) {
-      if ( game.currentPlayer.balance > (game.currentRoll + 1) ) {
+      if ( game.currentPlayer.balance >= (game.currentRoll + 1) ) {
         buyEstablishments(game.currentPlayer);
       } else {
         modal.header();
@@ -207,7 +256,7 @@ game.roll.click(function() {
         modal.ohClick(); // includes switchTurns
       }
   } else if ( game.countAvailableEstablishments() === 0 ){
-    mondal.header();
+    modal.header();
     modal.footerOhWell();
     modal.bodyBothPurchased();
     modal.ohClick(); // includes switchTurns
@@ -348,8 +397,8 @@ game.reset.click (function() {
   $('.destination').css("background-color", "#7768AE");
 
   //Reset the player announce bars
-  game.player1.announce.css({'color': '#121212', 'border': '2px solid #121212'});
-  game.player2.announce.css({'color': '#121212', 'border': '2px solid #121212'});
+  game.player1.annouce.style({'color': '#333', 'border': '2px solid #121212'});
+  game.player2.annouce.style({'color': '#333', 'border': '2px solid #121212'});
 })
 
 ///////////////*Debugging Helpers*\\\\\\\\\\\\\\\\\\\\\\\\
