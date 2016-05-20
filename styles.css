@@ -57,8 +57,16 @@ body {
   border: 2px solid #333;
 }
 
-#roll {
 
+h4.modal-title {
+  font-family: 'Sigmar One', cursive;
+  letter-spacing: .1em;
+}
+
+
+.current-player{
+  'color': #E1BC29;
+  'border': 2px solid #E0BB28;
 }
 
 
@@ -148,15 +156,41 @@ h3 {
 
 
 p {
-  font-size: 14px;
+  font-size: 13px;
 }
 
 
 p.num {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: bolder;
 }
 
+a[title] {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 11px;
+}
+
+
+.popover {
+  width: 200px;
+}
+
+.popover-title {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 13px;
+  padding: 2px 30px;
+  background-color: #E1BC29;
+  font-weight: 700;
+  text-align: center;
+}
+
+.popover-content {
+  font-size: 11px;
+  padding: 2px 3px;
+  font-weight: 400;
+  text-align: center;
+
+}
 
 /*Shared card style*/
 .card {
@@ -344,16 +378,4 @@ p.num {
 #destB6 {
   left: 735px;
   top: 480px
-}
-
-
-h4.modal-title {
-  font-family: 'Sigmar One', cursive;
-  letter-spacing: .1em;
-}
-
-
-.current-player{
-  'color': #E1BC29;
-  'border': 2px solid #E1BC29;
 }

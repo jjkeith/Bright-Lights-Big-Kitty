@@ -44,25 +44,8 @@ var game = {
 
     //This function is meant to flash the balance in yellow when it changes. Not working.
     updateBalances: function () {
-      var p1BalBefore = game.player1.balance;
-      var p2BalBefore = game.player2.balance;
       game.player1.balanceDisplay.html('ξ' + game.player1.balance);
-      game.player2.balanceDisplay.html('ξ' + game.player2.balance);
-      var p1BalAfter = game.player1.balance;
-      var p2BalAfter = game.player2.balance;
-      if (p1BalBefore !== p1BalAfter) {
-        setTimeout(function(){
-            game.player1.balanceDisplay.css({'color': '#E1BC29'});
-            console.log("timer should trigger")
-
-          }, 1000);
-      } else if (p2BalBefore !== p2BalAfter) {
-        setTimeout(function(){
-            game.player1.balanceDisplay.css({'color': '#E1BC29'});
-          }, 1000);
-      }
-    },
-    //the first two methods below half work -- they change the color but not the border.
+      game.player2.balanceDisplay.html('ξ' + game.player2.balance);},
     activeConsole: function () {
       game.currentPlayer.scoreBox.css({'color': '#E1BC29', 'border': '2px solid #E1BC29'}) },
     inactiveConsole: function () {
@@ -217,11 +200,6 @@ function startGame () {
   });
 }
 
-
-
-
-
-
 ///////////////*Major Roll Function*\\\\\\\\\\\\\\\\\\\\\\\\
 
 //roll the die and buy properties
@@ -303,18 +281,27 @@ function winGame () {
 payRent = function(player) {
 //Player 1 rent
   console.log('1 bal before: ' + game.player1.balance + ' ; 2 bal before: ' + game.player2.balance);
+  var p1BalBefore = game.player1.balance;
   if ( game.player1.destinationProgress <= game.currentRoll ) {
     game.player1.balance += ( game.currentRoll + 1 ) * (game.countPlayer1OwnedEstablishments () )
   } else {
     game.player1.balance += ( game.currentRoll + 2) * (game.countPlayer1OwnedEstablishments() )
   }
-
+  if (p1BalBefore !== p1BalAfter) {
+        game.player1.balanceDisplay.fadeIn(250).fadeOut(150).fadeIn(250).fadeOut(150).fadeIn(250);
+  }
 //Player2 rent
+  var p2BalBefore = game.player2.balance;
   if ( game.player2.destinationProgress <= game.currentRoll ) {
     game.player2.balance += ( game.currentRoll + 1 ) * (game.countPlayer2OwnedEstablishments () )
   } else {
     game.player2.balance += ( game.currentRoll + 2) * (game.countPlayer2OwnedEstablishments() )
   } console.log('1 bal after : ' + game.player1.balance + ' ; 2 bal after : ' + game.player2.balance);
+    var p1BalAfter = game.player1.balance;
+    var p2BalAfter = game.player2.balance;
+  if (p2BalBefore !== p2BalAfter) {
+          game.player2.balanceDisplay.fadeIn(250).fadeOut(150).fadeIn(250).fadeOut(150).fadeIn(250);
+  }
 }
 
 //guide the player through buying a destination
@@ -357,6 +344,7 @@ function buyDestinations(player) {
     })
 }
 
+//Determine which establishment card the user may buy
 function buyEstablishments(player) {
   $('#yes').on('click', {player: player} ,function(evt) {
     evt.data.player.balance -= (game.currentRoll + 1);
@@ -402,3 +390,5 @@ game.reset.click (function() {
   game.player1.scoreBox.css({'color': '#333', 'border': '2px solid #121212'});
   game.player2.scoreBox.css  ({'color': '#333', 'border': '2px solid #121212'});
 })
+
+$('[data-toggle="popover"]').popover();
