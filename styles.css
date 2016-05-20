@@ -17,11 +17,11 @@ body {
 
 
 .console-info {
+  color: #333;
   position: absolute;
   height: 80px;
   box-sizing: border-box;
   width: 200px;
-  border: 2px solid #333;
   text-align: center;
   border-radius: 5px;
 }
@@ -32,6 +32,7 @@ body {
   /*remember that if you change the color you have to change the color property in js*/
   top: 80px;
   left: 30px;
+  border: 2px solid #333;
 }
 
 
@@ -48,30 +49,30 @@ body {
    /*remember that if you change the color you have to change the color property in js*/
    top: 80px;
    left: 670px;
+   border: 2px solid #333;
  }
 
-
-#roll {
+.btn, .btn:hover {
   background-color: #E1BC29;
   border: 2px solid #333;
 }
 
+#roll {
+
+}
+
 
  #start {
-   background-color: #E1BC29;
    position: absolute;
    top: 30px;
    left: 30px;
-   border: 2px solid #333;
  }
 
 
  #reset {
-   background-color: #E1BC29;
    position: absolute;
    top: 30px;
    left: 773px;
-   border: 2px solid #333;
  }
 
 
