@@ -53,6 +53,7 @@ Hairballerz was created with HTML, CSS, Javascript, jQuery, and Bootstrap. The g
 
 ###Known Issues
 * The modal covers Player 2's balance so the user can't see when it blinks to indicate that rent has been earned.
+* Players can roll over and over again by escaping out of the modal.
 
 ###Credits
 * Rules and theme: Beatrix Keith
