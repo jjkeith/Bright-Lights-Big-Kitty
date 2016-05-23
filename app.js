@@ -135,9 +135,7 @@ var modal = {
       "class='btn btn-default' data-dismiss='modal' id = 'oh'>Oh well</button>"); },
   footerYay: function () {  $(".modal-footer").html("<button type='button'" +
       "class='btn btn-default' data-dismiss='modal' id = 'yay'>yay!</button>"); },
-  ohClick: function () { console.log( "switchTurns" );
-        switchTurns();
-        $( "#oh" ).on( "click" ); },
+  ohClick: function () { switchTurns(); $( "#oh" ).on( "click" ); },
 
   //arrays
   rollArray: ['⚀', '⚁', '⚂', '⚃', '⚄', '⚅'],
@@ -167,7 +165,6 @@ $('body').on("click", game.submit, function() {
 //Bring up a form where users can input their names
 function greetingModal() {
   game.start.click(function() {
-  console.log("start")
   game.updateBalances();
   modal.bodyGreeting();
   modal.footerBlank();
@@ -291,7 +288,6 @@ function winGame () {
 //Pay rent to the player on every roll
 payRent = function(player) {
 //Player 1 rent
-  console.log('1 bal before: ' + game.player1.balance + ' ; 2 bal before: ' + game.player2.balance);
   var p1BalBefore = game.player1.balance;
   if ( game.player1.destinationProgress <= game.currentRoll ) {
     game.player1.balance += ( game.currentRoll + 1 ) * (game.countPlayer1OwnedEstablishments () )
@@ -309,7 +305,7 @@ payRent = function(player) {
     game.player2.balance += ( game.currentRoll + 1 ) * (game.countPlayer2OwnedEstablishments () )
   } else {
     game.player2.balance += ( game.currentRoll + 2) * (game.countPlayer2OwnedEstablishments() )
-  } console.log('1 bal after : ' + game.player1.balance + ' ; 2 bal after : ' + game.player2.balance);
+  }
 
   //If rent has been paid, make the player's balance flash.
   var p2BalAfter = game.player2.balance;
