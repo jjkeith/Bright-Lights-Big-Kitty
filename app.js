@@ -1,12 +1,12 @@
 /*\ Hairballerz! by JJ Keith
 |*| (Alternate title Bright Lights, Big Kitty)
-|*| 
-|*| Hairballerz is a cat-themed real estate card game. The goal of Hairballerz is to collect 
-|*| establishments that will earn rent. Once enough cat coinz(ξ) is collected in rent, players 
-|*| can invest in destinations that will increase their establishments' rent and get them 
+|*|
+|*| Hairballerz is a cat-themed real estate card game. The goal of Hairballerz is to collect
+|*| establishments that will earn rent. Once enough cat coinz(ξ) is collected in rent, players
+|*| can invest in destinations that will increase their establishments' rent and get them
 |*| closer to winning the title of Chief Hairballer.
-|*| 
-|*| 
+|*|
+|*|
 \*/
 
 var game = {
@@ -94,22 +94,9 @@ var game = {
 var modal = {
   header: function() { $(".modal-title").html('<h2>' + game.currentPlayer.name + ' rolled a <big>'
     + modal.rollArray[game.currentRoll] + '</big></h2>'); },
-  headerPurge: function() { $(".modal-title").html(''); },
   headerColor: function () { $(".modal-header").css('background-color', game.currentPlayer.color); },
+  headerPurge: function() { $(".modal-title").html(''); },
   headerWin: function () { $(".modal-header").html('<h3>' + game.currentPlayer.name + ' WON!!!! OMG!!</h3>'); },
-  bodyGreeting: function () {$(".modal-body").html("<h4>Please enter your names.</h4><form role='form'><div class='form-group'>" +
-    "<label for='player-1'>Player 1</label><input type='text' class='form-control' id='player1Input' placeholder='Player 1'>" +
-    "<label for='player-2'>Player 2</label><input type='text' class='form-control' id='player2Input' placeholder='Player 2'>" +
-    "</div><center><button type='submit' class='btn btn-neutral' id = 'submit'></span>Submit</button></center></form>" +
-    "<br /><img src='greeting.gif' alt='greeting cat' height='200'>") },
-  bodyGreetingPage2: function () {$(".modal-body").html("<p>Hairballerz is a " +
-  "cat-themed real estate card game. The goal of Hairballerz is to collect " +
-  " establishments that will earn rent. Once enough cat coinz(ξ) is collected " +
-  "in rent, players can invest in destinations that" +
-  " will increase their establishments' rent and get them closer to winning the " +
-  "title of Chief Hairballer.<br /><h3>" + game.currentPlayer.name +
-  " goes first!<br /><img src='cat5.gif' alt='space cat' height='200'>") },
-  
   bodyBothPurchased: function () { $(".modal-body").html('Both of the properties for this roll have been purchased.' +
       "<br /><img src='cat3.gif' alt='space cat' height='200'>") },
   bodyDestination: function () { $(".modal-body").html('You have ξ' + game.currentPlayer.balance +
@@ -118,6 +105,18 @@ var modal = {
   bodyEstablishment: function () { $(".modal-body").html('You have ξ' + game.currentPlayer.balance +
       ' in the bank.<br />' + 'Would you like to buy ' + modal.establishmentStrings[game.currentRoll] +
       "?<br /><img src='cat1.gif' alt='space cat' height='200'>"); },
+      bodyGreeting: function () {$(".modal-body").html("<h4>Please enter your names.</h4><form role='form'><div class='form-group'>" +
+        "<label for='player-1'>Player 1</label><input type='text' class='form-control' id='player1Input' placeholder='Player 1'>" +
+        "<label for='player-2'>Player 2</label><input type='text' class='form-control' id='player2Input' placeholder='Player 2'>" +
+        "</div><center><button type='submit' class='btn btn-neutral' id = 'submit'></span>Submit</button></center></form>" +
+        "<br /><img src='greeting.gif' alt='greeting cat' height='200'>") },
+      bodyGreetingPage2: function () {$(".modal-body").html("<p>Hairballerz is a " +
+      "cat-themed real estate card game. The goal of Hairballerz is to collect " +
+      " establishments that will earn rent. Once enough cat coinz(ξ) is collected " +
+      "in rent, players can invest in destinations that" +
+      " will increase their establishments' rent and get them closer to winning the " +
+      "title of Chief Hairballer.<br /><h3>" + game.currentPlayer.name +
+      " goes first!<br /><img src='cat5.gif' alt='space cat' height='200'>") },
   bodyNotEnoughCash: function () { $(".modal-body").html('You have ξ' + game.currentPlayer.balance +
       ' in the bank.<br />' + 'Sorry, that is not enough to buy ' + modal.establishmentStrings[game.currentRoll] +
       "<br /><img src='cat2.gif' alt='space cat' height='200'>"); },
@@ -233,7 +232,7 @@ game.roll.click(function() {
   modal.headerColor();
   modal.header();
   modal.footerNah();
-  modal.bodyEstablishment(); 
+  modal.bodyEstablishment();
 
 //If the player has enough money, buy a destination or else buy an establishment.
 //If not enough money and/or establishments not available, end turn.
@@ -299,7 +298,7 @@ payRent = function(player) {
   } else {
     game.player1.balance += ( game.currentRoll + 2) * (game.countPlayer1OwnedEstablishments() )
   }
-  //If rent has been paid, make the player's balance flash. 
+  //If rent has been paid, make the player's balance flash.
   var p1BalAfter = game.player1.balance;
   if (p1BalBefore !== p1BalAfter) {
         game.player1.balanceDisplay.fadeIn(250).fadeOut(150).fadeIn(250).fadeOut(150).fadeIn(250);
@@ -311,8 +310,8 @@ payRent = function(player) {
   } else {
     game.player2.balance += ( game.currentRoll + 2) * (game.countPlayer2OwnedEstablishments() )
   } console.log('1 bal after : ' + game.player1.balance + ' ; 2 bal after : ' + game.player2.balance);
-  
-  //If rent has been paid, make the player's balance flash.   
+
+  //If rent has been paid, make the player's balance flash.
   var p2BalAfter = game.player2.balance;
   if (p2BalBefore !== p2BalAfter) {
           game.player2.balanceDisplay.fadeIn(250).fadeOut(150).fadeIn(250).fadeOut(150).fadeIn(250);
