@@ -54,6 +54,8 @@ Hairballerz was created with HTML, CSS, Javascript, jQuery, and Bootstrap. The g
 ###Known Issues
 * The modal covers Player 2's balance so the user can't see when it blinks to indicate that rent has been earned.
 * Players can roll over and over again by escaping out of the modal.
+* Some JS functions are not scalable. Some checker functions should be written recursively.
+* The use of first() and last() limits the game to having only two establishment cards per roll. 
 
 ###Credits
 * Rules and theme: Beatrix Keith

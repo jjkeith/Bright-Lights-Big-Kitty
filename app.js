@@ -56,6 +56,8 @@ var game = {
       game.currentPlayer.scoreBox.css({'color': '#E1BC29', 'border': '2px solid #E1BC29'}) },
     inactiveConsole: function () {
       game.currentPlayer.scoreBox.css({'color': '#333', 'border': '2px solid #333'}) },
+
+    // these functions should be recursive so that the game is scalable. 
     countAvailableEstablishments: function () {
       if ( (game.activeEstablishment.first() ).hasClass('unpurchased')
         && (game.activeEstablishment.last() ).hasClass('unpurchased') ) {
@@ -78,6 +80,14 @@ var game = {
           }
         },
       countPlayer2OwnedEstablishments: function () {
+      //   var count = 0;
+      //   for (var i = 0; i < game.activeEstablishment.length; i++) {
+      //     if ( game.activeEstablishment[i].hasClass('player2') ) {
+      //       count += 1;
+      //     }
+      //   } return count;
+      // }
+
           if ( (game.activeEstablishment.first() ).hasClass('player2')
             && (game.activeEstablishment.last() ).hasClass('player2') ) {
               return 2;
