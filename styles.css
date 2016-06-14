@@ -1,7 +1,7 @@
 /*Positioning throughout is absolute*/
 
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Short Stack', cursive;
   text-align: center;
   color: #333;
   background-color: #FFF;
@@ -15,7 +15,6 @@ body {
   margin: 0 auto;
 }
 
-
 .console-info {
   color: #333;
   position: absolute;
@@ -26,7 +25,6 @@ body {
   border-radius: 5px;
 }
 
-
 .player1 {
   background-color: #E15554;
   /*remember that if you change the color you have to change the color property in js*/
@@ -35,14 +33,12 @@ body {
   border: 2px solid #333;
 }
 
-
  #die {
    background-color: #FFF;
    top: 80px;
    left: 347.5px;
    border: 2px solid white;
  }
-
 
  .player2 {
    background-color: #3BB273;
@@ -59,7 +55,7 @@ body {
 
 
 h4.modal-title {
-  font-family: 'Sigmar One', cursive;
+  font-family: 'Short Stack', cursive;
   letter-spacing: .1em;
 }
 
@@ -137,19 +133,14 @@ h4.modal-title {
 
 
 h1 {
-  font-family: 'Sigmar One', cursive;
   letter-spacing: .3em;
 }
 
-
 h2 {
-  font-family: 'Sigmar One', cursive;
   letter-spacing: .1em;
 }
 
-
 h3 {
-  font-family: 'Sigmar One', cursive;
   font-size: 16px;
   padding: 0;
 }
@@ -166,7 +157,7 @@ p.num {
 }
 
 a[title] {
-  font-family: 'Open Sans', sans-serif;
+  /*font-family: 'Open Sans', sans-serif;*/
   font-size: 14px;
 }
 

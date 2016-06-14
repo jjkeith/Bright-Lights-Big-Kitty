@@ -57,7 +57,7 @@ var game = {
     inactiveConsole: function () {
       game.currentPlayer.scoreBox.css({'color': '#333', 'border': '2px solid #333'}) },
 
-    // these functions should be recursive so that the game is scalable. 
+    // these functions should be recursive so that the game is scalable.
     countAvailableEstablishments: function () {
       if ( (game.activeEstablishment.first() ).hasClass('unpurchased')
         && (game.activeEstablishment.last() ).hasClass('unpurchased') ) {
@@ -108,32 +108,32 @@ var modal = {
   headerPurge: function() { $(".modal-title").html(''); },
   headerWin: function () { $(".modal-header").html('<h3>' + game.currentPlayer.name + ' WON!!!! OMG!!</h3>'); },
   bodyBothPurchased: function () { $(".modal-body").html('Both of the properties for this roll have been purchased.' +
-      "<br /><img src='cat3.gif' alt='space cat' height='200'>") },
+      "<br /><img src='cat_gifs/cat3.gif' alt='space cat' height='200'>") },
   bodyDestination: function () { $(".modal-body").html('You have ξ' + game.currentPlayer.balance +
     ' in the bank.<br />'  + "That's enough to buy a destination!<br />" + 'Would you like to buy the ' +
-      modal.destinationStrings[game.currentPlayer.destinationProgress] + "?<br /><img src='cat4.gif' alt='space cat' height='200'>"); },
+      modal.destinationStrings[game.currentPlayer.destinationProgress] + "?<br /><img src='cat_gifs/cat4.gif' alt='space cat' height='200'>"); },
   bodyEstablishment: function () { $(".modal-body").html('You have ξ' + game.currentPlayer.balance +
       ' in the bank.<br />' + 'Would you like to buy ' + modal.establishmentStrings[game.currentRoll] +
-      "?<br /><img src='cat1.gif' alt='space cat' height='200'>"); },
+      "?<br /><img src='cat_gifs/cat1.gif' alt='space cat' height='200'>"); },
       bodyGreeting: function () {$(".modal-body").html("<h4>Please enter your names.</h4><form role='form'><div class='form-group'>" +
         "<label for='player-1'>Player 1</label><input type='text' class='form-control' id='player1Input' placeholder='Player 1'>" +
         "<label for='player-2'>Player 2</label><input type='text' class='form-control' id='player2Input' placeholder='Player 2'>" +
         "</div><center><button type='submit' class='btn btn-neutral' id = 'submit'></span>Submit</button></center></form>" +
-        "<br /><img src='greeting.gif' alt='greeting cat' height='200'>") },
+        "<br /><img src='cat_gifs/greeting.gif' alt='greeting cat' height='200'>") },
       bodyGreetingPage2: function () {$(".modal-body").html("<p>Hairballerz is a " +
       "cat-themed real estate card game. The goal of Hairballerz is to collect " +
       " establishments that will earn rent. Once enough cat coinz(ξ) is collected " +
       "in rent, players can invest in destinations that" +
       " will increase their establishments' rent and get them closer to winning the " +
       "title of Chief Hairballer.<br /><h3>" + game.currentPlayer.name +
-      " goes first!<br /><img src='cat5.gif' alt='space cat' height='200'>") },
+      " goes first!<br /><img src='cat_gifs/cat5.gif' alt='space cat' height='200'>") },
   bodyNotEnoughCash: function () { $(".modal-body").html('You have ξ' + game.currentPlayer.balance +
       ' in the bank.<br />' + 'Sorry, that is not enough to buy ' + modal.establishmentStrings[game.currentRoll] +
-      "<br /><img src='cat2.gif' alt='space cat' height='200'>"); },
+      "<br /><img src='cat_gifs/cat2.gif' alt='space cat' height='200'>"); },
   bodyOkThen: function () { $(".modal-body").html('Okay then. You have ξ' + game.currentPlayer.balance +
       ' in the bank.<br />' + 'Would you like to buy ' + modal.establishmentStrings[game.currentRoll] + '?' +
-      "<br /><img src='cat5.gif' alt='space cat' height='200'>"); },
-  bodyWin: function() { $(".modal-body").html("Do you want to play again?<br /><img src='winner.gif' alt='winner cat' height='200'>"); },
+      "<br /><img src='cat_gifs/cat5.gif' alt='space cat' height='200'>"); },
+  bodyWin: function() { $(".modal-body").html("Do you want to play again?<br /><img src='cat_gifs/winner.gif' alt='winner cat' height='200'>"); },
   footerBlank: function() { $(".modal-footer").html(""); },
   footerNah: function () { $(".modal-footer").html("<button type='button' class='btn btn-default'" +
       " data-dismiss='null' id = 'nah'>Nah</button>" + "<button type='button' class='btn" +
