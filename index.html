@@ -10,8 +10,8 @@
 
     <link href="https://fonts.googleapis.com/css?family=Short+Stack" rel="stylesheet">
 
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700'
-      rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700"
+      rel="stylesheet" type="text/css">
 
     <link rel = "stylesheet"
           href="styles.css"></styles>
@@ -19,134 +19,122 @@
           integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ="
           crossorigin="anonymous"></script>
 
-
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
         integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
         crossorigin="anonymous"></script>
 
-
     <title>Bright Lights, Big Kitty</title>
   </head>
 <body>
-    <div id = 'title'><h1>Bright Lights, Big Kitty</h1></div>
-
-<h3><button class='btn btn-default btn-lg' id = 'start'>Start</button></h3>
-<h3><button class='btn btn-default btn-lg' id = 'reset'>Reset</button></h3>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-2">
+      <h3><button class="btn btn-default btn-lg" id = "start">Start</button></h3>
+    </div>
+    <div class="col-xs-8">
+      <div class="page-header">
+        <h1>Bright Lights, Big Kitty</h1>
+      </div>
+    </div>
+    <div class="col-xs-2">
+      <h3><button class="btn btn-default btn-lg" id = "reset">Reset</button></h3>
+    </div>
+  </div>
 
 <!-- begin console -->
-<div class = 'console-info player1'><h3 id = 'player1Announce'>Player 1</h3>
-  <h4 id = 'player1BalanceDisplay'></h4>
-</div>
+  <div class="row">
+    <!-- Player 1 Display -->
+    <div class="col-xs-3 console-info player1">
+      <h3 id = "player1Announce">Player 1</h3>
+        <h4 id = "player1BalanceDisplay"></h4>
+    </div>
+    <!-- Roll Button -->
+    <div class="col-xs-6 console-info" id = "die">
+      <!-- Button trigger modal -->
+      <h3><button type="button" class="btn btn-default btn-lg"
+      data-toggle="modal" data-target="#myModal" id = "roll"><a href = "#roll">Roll
+      </button></a></h3>
+    </div>
+    <!-- Player 2 Display -->
+    <div class="col-xs-3 console-info player2"><h3 id = "player2Announce">Player 2</h3>
+       <h4 id = "player2BalanceDisplay"></h4>
+    </div>>
+  </div>
 
-<div class = 'console-info' id = 'die'>
-  <!-- Button trigger modal -->
-  <h3><button type="button" class="btn btn-default btn-lg"
-  data-toggle="modal" data-target="#myModal" id = 'roll'><a href = '#roll'>Roll
-  </button></a></h3>
-</div>
-
-<div class = 'console-info player2' ><h3 id = 'player2Announce'>Player 2</h3>
-   <h4 id = 'player2BalanceDisplay'></h4>
- </div>
-
+  <h2 id = "establishments"> Cat Establishments</h2>
+  <h4 id = "establishments-instrux">Players may only purchase the establishment
+      that corresponds with their roll.</h4>
 
 <!-- begin first row of cards -->
-<div class = 'row'>
-
-<h2 id = 'establishments'> Cat Establishments</h2>
-<h4 id = 'establishments-instrux'>Players may only purchase the establishment
-  that corresponds with their roll.</h4>
-
-<!-- The top cards -->
-<div class = 'card establishment unpurchased' id = 'estA1' data-number = '0'>
-  <p class=num>①</p>
-<p><img src='caticon.png' alt='cat icon' height='30'><p>
-  <a href="#estA1" data-toggle="popover" data-trigger="hover"
-  data-placement="top" data-html="true" title="The Veterinary Offices of Katz & Nuzzle"
-    data-content="Our slogan: 'We don't put cats down, we raise them UP... to
-    the apex of health! <br /><br />Earns ξ1 on roll of ⚀<br /><br />">
-    More Info</a>
-    <br /><strong>ξ1</strong></p>
+  <div class="row">
+    <div class="col-xs-2">
+      <div class="card establishment unpurchased pull-right" id = "estA1" data-number = "0">
+        <p class=num>①</p>
+          <a href="#estA1" data-toggle="popover" data-trigger="hover"         data-placement="top" data-html="true" title="The Veterinary Offices of Katz and Nuzzle" data-content="Our slogan: 'We don't put cats down, we raise them UP... to the apex of health! <br /><br />Earns ξ1 on roll of ⚀<br /><br />">More Info</a>
+          <br /><strong>ξ1</strong></p>
+      </div>
+      <div class = "card behind-establishment unpurchased" id = "estB1" data-number = "0"><p></div>
+    </div>
+    <div class="col-xs-2">
+      <div class="card establishment unpurchased pull-right" id = "estA2" data-number = "1">
+        <p class=num>②</p>
+          <a href="#estA2" data-toggle="popover" data-trigger="hover"         data-placement="top" data-html="true" title="Tuna 'R' Us"           data-content="Why carry a variety of cat foods when you can carry a whole lot of the best and only the best?<br /><br />Earns ξ2 on roll of ⚁<br /><br />">More Info</a>
+          <br /><strong>ξ2</strong></p>
+      </div>
+      <div class = "card behind-establishment unpurchased" id = "estB2" data-number = "1"><p></div>
+    </div>
+    <div class="col-xs-2">
+      <div class= "card establishment unpurchased pull-right" id = "estA3" data-number = "2">
+        <p class=num>③</p>
+          <a href="#estA3" data-toggle="popover" data-trigger="hover"         data-placement="top" data-html="true" title="Purrfect Coif Groomer"           data-content="Are you feral? Of course not, darling! Now come in and get your fur did before someone mistakes you for a feral.<br /><br />Earns ξ3 on roll of ⚂<br /><br />">More Info</a>
+          <br /><strong>ξ3</strong></p>
+      </div>
+      <div class = "card behind-establishment unpurchased" id = "estB3" data-number = "2"><p></div>
+    </div>
+    <div class="col-xs-2">
+      <div class= "card establishment unpurchased pull-right" id = "estA4" data-number = "3">
+        <p class=num>④</p>
+          <a href="#estA4" data-toggle="popover" data-trigger="hover"         data-placement="top" data-html="true" title="Clawsitive Reinforcement Training Academy" data-content="Are your kittens making you wish you had eight fewer lives? Get those kits acting proper with our expert trainers. <br /><br />Earns ξ4 on roll of ⚃<br /><br />">More Info</a>
+          <br /><strong>ξ4</strong></p>
+      </div>
+      <div class = "card behind-establishment unpurchased" id = "estB4" data-number = "3"><p></div>
+    </div>
+    <div class="col-xs-2">
+      <div class= "card establishment unpurchased pull-right" id = "estA5" data-number = "4">
+        <p class=num>⑤</p>
+          <a href="#estA5" data-toggle="popover" data-trigger="hover"           data-placement="top" data-html="true" title="Pawsplay Costume Rentals"           data-content="You know you don't want to be the only kitty at CatCon           without a costume (or worse — dressed as Grumpy Cat like every other           fraud). Rent your way into the Cool Cat Nerd Club. <br /><br />Earns ξ5 on roll of ⚄<br /><br />">More Info</a>
+          <br /><strong>ξ5</strong></p>
+      </div>
+      <div class = "card behind-establishment unpurchased" id = "estB5" data-number = "4"><p></div>
+    </div>
+    <div class="col-xs-2">
+      <div class = "card establishment unpurchased pull-right" id = "estA6" data-number = "5">
+        <p class=num>⑥</p>
+          <a href="#estA6" data-toggle="popover" data-trigger="hover"         data-placement="top" data-html="true" title="Flea Strasburg Acting School" data-content="Don't waste your glamour puss charms just lounging by the window. Work your way into an A-list future.<br /><br />Earns ξ6 on roll of ⚅<br /><br />">More Info</a>
+          <br /><strong>ξ6</strong></p>
+      </div>
+      <div class = "card behind-establishment unpurchased" id = "estB6" data-number = "5"><p></div>
+    </div>
   </div>
-
-<div class = 'card establishment unpurchased' id = 'estA2' data-number = '1'>
-  <p class=num>②</p>
-  <p><img src='caticon.png' alt='cat icon' height='30'><p>
-    <a href="#estA2" data-toggle="popover" data-trigger="hover"
-    data-placement="top" data-html="true" title="Tuna 'R' Us"
-      data-content="Why carry a variety of cat foods when you can carry a whole
-      lot of the best and only the best?<br /><br />Earns ξ2 on roll of ⚁<br />
-      <br />">More Info</a>
-    <br /><strong>ξ2</strong></p>
-  </div>
-
-<div class = 'card establishment unpurchased' id = 'estA3' data-number = '2'>
-  <p class=num>③</p>
-  <p><img src='caticon.png' alt='cat icon' height='30'><p>
-    <a href="#estA3" data-toggle="popover" data-trigger="hover"
-    data-placement="top" data-html="true" title="Purrfect Coif Groomer"
-      data-content="Are you feral? Of course not, darling! Now come in and get
-      your fur did before someone mistakes you for a feral.<br /><br />Earns ξ3
-      on roll of ⚂<br /><br />">More Info</a>
-    <br /><strong>ξ3</strong></p>
-  </div>
-
-<div class = 'card establishment unpurchased' id = 'estA4' data-number = '3'>
-  <p class=num>④</p>
-  <p><img src='caticon.png' alt='cat icon' height='30'><p>
-    <a href="#estA4" data-toggle="popover" data-trigger="hover"
-    data-placement="top" data-html="true" title="Clawsitive Reinforcement Training Academy"
-      data-content="Are your kittens making you wish you had eight fewer lives?
-       Get those kits acting proper with our expert trainers. <br /><br />Earns
-       ξ4 on roll of ⚃<br /><br />">More Info</a>
-    <br /><strong>ξ4</strong></p>
-  </div>
-
-<div class = 'card establishment unpurchased' id = 'estA5' data-number = '4'>
-  <p class=num>⑤</p>
-  <p><img src='caticon.png' alt='cat icon' height='30'><p>
-    <a href="#estA5" data-toggle="popover" data-trigger="hover"
-    data-placement="top" data-html="true" title="Pawsplay Costume Rentals"
-      data-content="You know you don't want to be the only kitty at CatCon
-      without a costume (or worse — dressed as Grumpy Cat like every other
-      fraud). Rent your way into the Cool Cat Nerd Club. <br /><br />Earns ξ5
-      on roll of ⚄<br /><br />">More Info</a>
-    <br /><strong>ξ5</strong></p>
-  </div>
-
-<div class = 'card establishment unpurchased' id = 'estA6' data-number = '5'>
-  <p class=num>⑥</p>
-  <p><img src='caticon.png' alt='cat icon' height='30'><p>
-    <a href="#estA6" data-toggle="popover" data-trigger="hover"
-    data-placement="top" data-html="true" title="Flea Strasburg Acting School"
-      data-content="Don't waste your glamour puss charms just lounging by the
-      window. Work your way into an A-list future.<br /><br />Earns ξ6 on roll
-      of ⚅<br /><br />">More Info</a>
-    <br /><strong>ξ6</strong></p>
 </div>
 
-<!-- The backrow of cards -->
-<div class = 'card behind-establishment unpurchased' id = 'estB1' data-number = '0'><p></div>
-<div class = 'card behind-establishment unpurchased' id = 'estB2' data-number = '1'><p></div>
-<div class = 'card behind-establishment unpurchased' id = 'estB3' data-number = '2'><p></div>
-<div class = 'card behind-establishment unpurchased' id = 'estB4' data-number = '3'><p></div>
-<div class = 'card behind-establishment unpurchased' id = 'estB5' data-number = '4'><p></div>
-<div class = 'card behind-establishment unpurchased' id = 'estB6' data-number = '5'><p></div>
+
+
 
 </div>
 
 <!-- begin second row of cards -->
-<div class = 'row'>
+<div class = "row">
 
-<h2 id = 'destinations'> Cat Destinations</h2>
-<h4 id = 'destinations-instrux'>Must buy in order.
+<h2 id = "destinations"> Cat Destinations</h2>
+<h4 id = "destinations-instrux">Must buy in order.
   Get WCAT Television Station to win!</h4>
 
 <!-- Top cards start here -->
-<div class = 'card destination unpurchased' id = 'destA1'  data-number = '10'>
+<div class = "card destination unpurchased" id = "destA1"  data-number = "10">
   <p class=num>①</p>
-  <p><img src='caticon.png' alt='cat icon' height='30'><p>
+
     <a href="#destA1" data-toggle="popover" data-trigger="hover"
     data-placement="top" data-html="true" title="Catnip Dispensary"
       data-content="How are the vets supposed to work without some dank
@@ -156,9 +144,9 @@
     <br /><strong>ξ10</strong></p>
 </div>
 
-<div class = 'card destination unpurchased' id = 'destA2' data-number = '11'>
+<div class = "card destination unpurchased" id = "destA2" data-number = "11">
   <p class=num>②</p>
-  <p><img src='caticon.png' alt='cat icon' height='30'><p>
+
     <a href="#destA2" data-toggle="popover" data-trigger="hover"
     data-placement="top" data-html="true" title="Tuna Cannery"
       data-content="Ever wondered how Tuna 'R' Us stocks so much tuna? We have
@@ -167,9 +155,9 @@
     <br /><strong>ξ14</strong></p>
 </div>
 
-<div class = 'card destination unpurchased' id = 'destA3' data-number = '12'>
+<div class = "card destination unpurchased" id = "destA3" data-number = "12">
   <p class=num>③</p>
-  <p><img src='caticon.png' alt='cat icon' height='30'><p>
+
     <a href="#destA3" data-toggle="popover" data-trigger="hover"
     data-placement="top" data-html="true" title="Catapult Magazine Headquarters"
       data-content="You know that stunning mug of yours was meant to be shown
@@ -178,9 +166,9 @@
     <br /><strong>ξ18</strong></p>
 </div>
 
-<div class = 'card destination unpurchased' id = 'destA4' data-number = '13'>
+<div class = "card destination unpurchased" id = "destA4" data-number = "13">
   <p class=num>④</p>
-  <p><img src='caticon.png' alt='cat icon' height='30'><p>
+
     <a href="#destA4" data-toggle="popover" data-trigger="hover"
     data-placement="top" data-html="true" title="Paw-trait Studio"
         data-content="Did your latest lit of kits just graduate from Clawsitive
@@ -190,9 +178,9 @@
     <br /><strong>ξ22</strong></p>
 </div>
 
-<div class = 'card destination unpurchased' id = 'destA5' data-number = '14'>
+<div class = "card destination unpurchased" id = "destA5" data-number = "14">
   <p class=num>⑤</p>
-  <p><img src='caticon.png' alt='cat icon' height='30'><p>
+
     <a href="#destA5" data-toggle="popover" data-trigger="hover"
     data-placement="top" data-html="true" title="CatCon Venue"
       data-content="Now that you have an amazing ceiling cat pawsplay costume,
@@ -201,23 +189,23 @@
     <br /><strong>ξ26</strong></p>
 </div>
 
-<div class = 'card destination unpurchased' id = 'destA6' data-number = '15'>
+<div class = "card destination unpurchased" id = "destA6" data-number = "15">
   <p class=num>⑥</p>
-  <p><img src='caticon.png' alt='cat icon' height='30'><p>
+
     <a href="#destA6" data-toggle="popover" data-trigger="hover"
     data-placement="top" data-html="true" title="WCAT Television Station"
-      data-content="Life under the bright lights, kitster. It's waiting for you.
+      data-content="Life under the bright lights, kitster. It"s waiting for you.
       <br /><br /><strong>Buy to win!</strong><br /><br /><br />">More Info</a>
     <br /><strong>ξ30</strong></p>
 </div>
 
 <!-- The backrow of cards -->
-<div class = 'card behind-destination unpurchased' id = 'destB1' data-number = '10'><p></div>
-<div class = 'card behind-destination unpurchased' id = 'destB2' data-number = '11'><p></div>
-<div class = 'card behind-destination unpurchased' id = 'destB3' data-number = '12'><p></div>
-<div class = 'card behind-destination unpurchased' id = 'destB4' data-number = '13'><p></div>
-<div class = 'card behind-destination unpurchased' id = 'destB5' data-number = '14'><p></div>
-<div class = 'card behind-destination unpurchased' id = 'destB6' data-number = '15'><p></div>
+<div class = "card behind-destination unpurchased" id = "destB1" data-number = "10"><p></div>
+<div class = "card behind-destination unpurchased" id = "destB2" data-number = "11"><p></div>
+<div class = "card behind-destination unpurchased" id = "destB3" data-number = "12"><p></div>
+<div class = "card behind-destination unpurchased" id = "destB4" data-number = "13"><p></div>
+<div class = "card behind-destination unpurchased" id = "destB5" data-number = "14"><p></div>
+<div class = "card behind-destination unpurchased" id = "destB6" data-number = "15"><p></div>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -232,13 +220,14 @@
         <p></p>
       </div>
       <div class="modal-footer">
-        <button type='button' class='btn btn-default' id = 'no'>No</button>
-        <button type='button' class='btn btn-default' data-dismiss='modal' id = 'yes'>Yes</button>
+        <button type="button" class="btn btn-default" id = "no">No</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" id = "yes">Yes</button>
       </div>
     </div>
   </div>
 </div>
 
+</div>
 
 
   <script src="app.js" charset="utf-8"></script>
