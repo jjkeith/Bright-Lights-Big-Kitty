@@ -1,54 +1,41 @@
-/*Positioning throughout is absolute*/
-
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Short Stack', cursive;
   text-align: center;
   color: #333;
   background-color: #FFF;
 }
 
-
-#title {
-  position: absolute;
-  top: 0;
-  left: 255px;
-  margin: 0 auto;
+.page-header {
+  border-bottom:none;
 }
 
+#start {
+  float: left;
+}
+
+#reset {
+  float: right;
+}
 
 .console-info {
   color: #333;
-  position: absolute;
-  height: 80px;
-  box-sizing: border-box;
-  width: 200px;
   text-align: center;
   border-radius: 5px;
 }
 
-
 .player1 {
   background-color: #E15554;
-  /*remember that if you change the color you have to change the color property in js*/
-  top: 80px;
-  left: 30px;
   border: 2px solid #333;
 }
 
-
  #die {
    background-color: #FFF;
-   top: 80px;
-   left: 347.5px;
    border: 2px solid white;
  }
-
 
  .player2 {
    background-color: #3BB273;
    /*remember that if you change the color you have to change the color property in js*/
-   top: 80px;
-   left: 670px;
    border: 2px solid #333;
  }
 
@@ -57,37 +44,19 @@ body {
   border: 2px solid #333;
 }
 
-
 h4.modal-title {
-  font-family: 'Sigmar One', cursive;
+  font-family: 'Short Stack', cursive;
   letter-spacing: .1em;
 }
-
 
 .current-player{
   'color': #E1BC29;
   'border': 2px solid #E0BB28;
 }
 
-
- #start {
-   position: absolute;
-   top: 30px;
-   left: 30px;
- }
-
-
- #reset {
-   position: absolute;
-   top: 30px;
-   left: 773px;
- }
-
-
  a {
    color: #333;
  }
-
 
  .btn-block {
      display: block;
@@ -99,66 +68,23 @@ h4.modal-title {
     background-color: #E1BC29;
  }
 
-
-
- /*************************************/
-
-
-  #establishments {
-   position: absolute;
-   top: 175px;
-   left: 250px;
-   margin: 0 auto;
- }
-
-
- #establishments-instrux {
-   position: absolute;
-   top: 215px;
-   left: 150px;
-   margin: 0 auto;
- }
-
-
-#destinations {
-   position: absolute;
-   top: 430px;
-   left: 275px;
-   margin: 0 auto;
- }
-
-
- #destinations-instrux {
-   position: absolute;
-   top: 470px;
-   left: 235px;
-   margin: 0 auto;
- }
-
-
 h1 {
-  font-family: 'Sigmar One', cursive;
   letter-spacing: .3em;
+  font-weight: bold;
 }
 
-
 h2 {
-  font-family: 'Sigmar One', cursive;
   letter-spacing: .1em;
 }
 
-
 h3 {
-  font-family: 'Sigmar One', cursive;
   font-size: 16px;
   padding: 0;
 }
 
-
 p {
   font-size: 13px;
 }
-
 
 p.num {
   font-size: 22px;
@@ -166,7 +92,7 @@ p.num {
 }
 
 a[title] {
-  font-family: 'Open Sans', sans-serif;
+  /*font-family: 'Open Sans', sans-serif;*/
   font-size: 14px;
 }
 
@@ -175,7 +101,7 @@ a[title] {
 }
 
 .popover-title {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Short Stack', cursive;
   font-size: 14px;
   padding: 2px 30px;
   background-color: #E1BC29;
@@ -184,11 +110,15 @@ a[title] {
 }
 
 .popover-content {
+  font-family: 'Short Stack', cursive;
   font-size: 13px;
   padding: 2px 3px;
   font-weight: 400;
   text-align: center;
+}
 
+.padding-below {
+  padding-bottom: 30px;
 }
 
 .footer {
@@ -202,188 +132,40 @@ a[title] {
 
 /*Shared card style*/
 .card {
-  box-sizing: border-box;
   height: 140px;
   width: 100px;
   border: 2px solid #333;
-  margin: 20px 20px 0 20px;
-  position: absolute;
   border-radius: 5px;
-  padding: 5px;
 }
 
-
 /*Style the front row of cards*/
+.front {
+  margin-top: 15px;
+  margin-left: 15px;
+  position: absolute;
+}
 
 .card.establishment {
   background-color: #4D9DE0;
 }
 
-
 .card.destination {
   background-color: #7768AE;
 }
 
-/*Position the top row of destination cards*/
-
-
-#estA1 {
-  left: 30px;
-  top: 240px
+.pull-up {
+  display: inline-block;
+  vertical-align: top;
 }
-
-
-#estA2 {
-  left: 175px;
-  top: 240px
-}
-
-
-#estA3 {
-  left: 320px;
-  top: 240px
-}
-
-
-#estA4 {
-  left: 465px;
-  top: 240px
-}
-
-
-#estA5 {
-  left: 610px;
-  top: 240px
-}
-
-
-#estA6 {
-  left: 755px;
-  top: 240px
-}
-
-
-/*Position the top row of destination cards*/
-
-#destA1 {
-  left: 30px;
-  top: 495px
-}
-
-
-#destA2 {
-  left: 175px;
-  top: 495px
-}
-
-
-#destA3 {
-  left: 320px;
-  top: 495px
-}
-
-
-#destA4 {
-  left: 465px;
-  top: 495px
-}
-
-
-#destA5 {
-  left: 610px;
-  top: 495px
-}
-
-
-#destA6 {
-  left: 755px;
-  top: 495px
-}
-
 
 /*Style the back rows of cards*/
 
 .card.behind-establishment {
   background-color: #438BC6;
   z-index: -1;
-  }
-
+}
 
 .card.behind-destination {
   background-color: #655893;
-  z-index: -1;}
-
-
-/*Position the back row of establishment cards*/
-
-#estB1 {
-  left: 10px;
-  top: 225px
-}
-
-
-#estB2 {
-  left: 155px;
-  top: 225px
-}
-
-
-#estB3 {
-  left: 300px;
-  top: 225px
-}
-
-
-#estB4 {
-  left: 445px;
-  top: 225px
-}
-
-
-#estB5 {
-  left: 590px;
-  top: 225px
-}
-
-
-#estB6 {
-  left: 735px;
-  top: 225px
-}
-
-
-/*Position the back row of destination cards*/
-#destB1 {
-  left: 10px;
-    top: 480px
-}
-
-
-#destB2 {
-  left: 155px;
-  top: 480px
-}
-
-
-#destB3 {
-  left: 300px;
-  top: 480px
-}
-
-
-#destB4 {
-  left: 445px;
-  top: 480px
-}
-
-
-#destB5 {
-  left: 590px;
-  top: 480px
-}
-
-
-#destB6 {
-  left: 735px;
-  top: 480px
+  z-index: -1;
 }

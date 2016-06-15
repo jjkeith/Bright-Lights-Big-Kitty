@@ -1,10 +1,9 @@
-/*\ Hairballerz -- by JJ Keith, 2016
-|*| Hairballerz is a cat-themed real estate card game. The goal of Hairballerz
-|*| is to collect establishments that will earn rent. Once enough cat coinz(ξ)
-|*| is collected in rent, players can invest in destinations that will increase
-|*| their establishments' rent and get them closer to winning the title of Chief
-|*| Hairballer.
+/*\ Bright Lights, Big Kitty
+|*| By JJ Keith
 |*|
+|*| Hairballerz is a cat-themed real estate card game. The goal of Hairballerz |*| is to collect establishments that will earn rent. Once enough cat coinz(ξ) |*| is collected in rent, players can invest in destinations that will increase |*| their establishments' rent and get them closer to winning the title of Chief |*| Hairballer.
+|*|
+|*| To do: refactor, simplify
 \*/
 
 var game = {
@@ -54,6 +53,8 @@ var game = {
       game.currentPlayer.scoreBox.css({'color': '#E1BC29', 'border': '2px solid #E1BC29'}) },
     inactiveConsole: function () {
       game.currentPlayer.scoreBox.css({'color': '#333', 'border': '2px solid #333'}) },
+
+    // these functions should be recursive so that the game is scalable.
     countAvailableEstablishments: function () {
       if ( (game.activeEstablishment.first() ).hasClass('unpurchased')
         && (game.activeEstablishment.last() ).hasClass('unpurchased') ) {
@@ -76,6 +77,14 @@ var game = {
           }
         },
       countPlayer2OwnedEstablishments: function () {
+      //   var count = 0;
+      //   for (var i = 0; i < game.activeEstablishment.length; i++) {
+      //     if ( game.activeEstablishment[i].hasClass('player2') ) {
+      //       count += 1;
+      //     }
+      //   } return count;
+      // }
+
           if ( (game.activeEstablishment.first() ).hasClass('player2')
             && (game.activeEstablishment.last() ).hasClass('player2') ) {
               return 2;
@@ -88,55 +97,54 @@ var game = {
           }
         }
 
+//This object contains all of the text that populates the modals.
 var modal = {
   header: function() { $(".modal-title").html('<h2>' + game.currentPlayer.name + ' rolled a <big>'
     + modal.rollArray[game.currentRoll] + '</big></h2>'); },
-  headerPurge: function() { $(".modal-title").html(''); },
   headerColor: function () { $(".modal-header").css('background-color', game.currentPlayer.color); },
-  headerWin: function () { $(".modal-header").html('<h4>' + game.currentPlayer.name + ' WON!!!! OMG!!</h4>'); },
-  bodyGreeting: function () {$(".modal-body").html("<h4>Please enter your names.</h4><form role='form'><div class='form-group'>" +
-    "<label for='player-1'>Player 1</label><input type='text' class='form-control' id='player1Input' placeholder='Player 1'>" +
-    "<label for='player-2'>Player 2</label><input type='text' class='form-control' id='player2Input' placeholder='Player 2'>" +
-    "</div><center><button type='submit' class='btn btn-neutral' id = 'submit'></span>Submit</button></center></form>" +
-    "<br /><img src='greeting.gif' alt='greeting cat' height='200'>") },
-  bodyGreetingPage2: function () {$(".modal-body").html("<p>Hairballerz is a " +
-  "cat-themed real estate card game. The goal of Hairballerz is to collect " +
-  " establishments that will earn rent. Once enough cat coinz(ξ) is collected " +
-  "in rent, players can invest in destinations that" +
-  " will increase their establishments' rent and get them closer to winning the " +
-  "title of Chief Hairballer.<br /><h3>" + game.currentPlayer.name +
-  " goes first!<br /><img src='cat5.gif' alt='space cat' height='200'>") },
-  bodyEstablishment: function () { $(".modal-body").html('You have ξ' + game.currentPlayer.balance +
-      ' in the bank.<br />' + 'Would you like to buy ' + modal.establishmentStrings[game.currentRoll] +
-      "?<br /><img src='cat1.gif' alt='space cat' height='200'>"); },
+  headerPurge: function() { $(".modal-title").html(''); },
+  headerWin: function () { $(".modal-header").html('<h3>' + game.currentPlayer.name + ' WON!!!! OMG!!</h3>'); },
+  bodyBothPurchased: function () { $(".modal-body").html('Both of the properties for this roll have been purchased.' +
+      "<br /><img src='cat_gifs/cat3.gif' alt='space cat' height='200'>") },
   bodyDestination: function () { $(".modal-body").html('You have ξ' + game.currentPlayer.balance +
     ' in the bank.<br />'  + "That's enough to buy a destination!<br />" + 'Would you like to buy the ' +
-      modal.destinationStrings[game.currentPlayer.destinationProgress] + "?<br /><img src='cat4.gif' alt='space cat' height='200'>"); },
-  bodyBothPurchased: function () { $(".modal-body").html('Both of the properties for this roll have been purchased.' +
-      "<br /><img src='cat3.gif' alt='space cat' height='200'>") },
+      modal.destinationStrings[game.currentPlayer.destinationProgress] + "?<br /><img src='cat_gifs/cat4.gif' alt='space cat' height='200'>"); },
+  bodyEstablishment: function () { $(".modal-body").html('You have ξ' + game.currentPlayer.balance +
+      ' in the bank.<br />' + 'Would you like to buy ' + modal.establishmentStrings[game.currentRoll] +
+      "?<br /><img src='cat_gifs/cat1.gif' alt='space cat' height='200'>"); },
+      bodyGreeting: function () {$(".modal-body").html("<h4>Please enter your names.</h4><form role='form'><div class='form-group'>" +
+        "<label for='player-1'>Player 1</label><input type='text' class='form-control' id='player1Input' placeholder='Player 1'>" +
+        "<label for='player-2'>Player 2</label><input type='text' class='form-control' id='player2Input' placeholder='Player 2'>" +
+        "</div><center><button type='submit' class='btn btn-neutral' id = 'submit'></span>Submit</button></center></form>" +
+        "<br /><img src='cat_gifs/greeting.gif' alt='greeting cat' height='200'>") },
+      bodyGreetingPage2: function () {$(".modal-body").html("<p>Hairballerz is a " +
+      "cat-themed real estate card game. The goal of Hairballerz is to collect " +
+      " establishments that will earn rent. Once enough cat coinz(ξ) is collected " +
+      "in rent, players can invest in destinations that" +
+      " will increase their establishments' rent and get them closer to winning the " +
+      "title of Chief Hairballer.<br /><h3>" + game.currentPlayer.name +
+      " goes first!<br /><img src='cat_gifs/cat5.gif' alt='space cat' height='200'>") },
   bodyNotEnoughCash: function () { $(".modal-body").html('You have ξ' + game.currentPlayer.balance +
       ' in the bank.<br />' + 'Sorry, that is not enough to buy ' + modal.establishmentStrings[game.currentRoll] +
-      "<br /><img src='cat2.gif' alt='space cat' height='200'>"); },
+      "<br /><img src='cat_gifs/cat2.gif' alt='space cat' height='200'>"); },
   bodyOkThen: function () { $(".modal-body").html('Okay then. You have ξ' + game.currentPlayer.balance +
       ' in the bank.<br />' + 'Would you like to buy ' + modal.establishmentStrings[game.currentRoll] + '?' +
-      "<br /><img src='cat5.gif' alt='space cat' height='200'>"); },
-  bodyWin: function() { $(".modal-body").html("Do you want to play again?<br /><img src='winner.gif' alt='winner cat' height='200'>"); },
-  footerYay: function () {  $(".modal-footer").html("<button type='button'" +
-      "class='btn btn-default' data-dismiss='modal' id = 'yay'>yay!</button>"); },
-  footerOhWell: function () {  $(".modal-footer").html("<button type='button'" +
-      "class='btn btn-default' data-dismiss='modal' id = 'oh'>Oh well</button>"); },
+      "<br /><img src='cat_gifs/cat5.gif' alt='space cat' height='200'>"); },
+  bodyWin: function() { $(".modal-body").html("Do you want to play again?<br /><img src='cat_gifs/winner.gif' alt='winner cat' height='200'>"); },
+  footerBlank: function() { $(".modal-footer").html(""); },
   footerNah: function () { $(".modal-footer").html("<button type='button' class='btn btn-default'" +
       " data-dismiss='null' id = 'nah'>Nah</button>" + "<button type='button' class='btn" +
       " btn-default' data-dismiss='modal' id = 'yes'>Totally!</button>"); },
   footerNope: function() { $(".modal-footer").html("<button type='button' class='btn btn-default'" +
       " data-dismiss='modal' id = 'nope'>Nope</button><button type='button'" +
       " class='btn btn-default' data-dismiss='modal' id = 'yes'>Let's build an empire!</button>"); },
-  footerBlank: function() { $(".modal-footer").html(""); },
-  ohClick: function () { console.log( "switchTurns" );
-        switchTurns();
-        $( "#oh" ).on( "click" ); },
+   footerOhWell: function () {  $(".modal-footer").html("<button type='button'" +
+      "class='btn btn-default' data-dismiss='modal' id = 'oh'>Oh well</button>"); },
+  footerYay: function () {  $(".modal-footer").html("<button type='button'" +
+      "class='btn btn-default' data-dismiss='modal' id = 'yay'>yay!</button>"); },
+  ohClick: function () { switchTurns(); $( "#oh" ).on( "click" ); },
 
-  //dialog string variables
+  //arrays
   rollArray: ['⚀', '⚁', '⚂', '⚃', '⚄', '⚅'],
   establishmentStrings: ["The Veterinary Offices of Katz & Nuzzle for ξ1",
     "Tuna 'R' Us for ξ2",
@@ -152,20 +160,18 @@ var modal = {
     'WCAT Television Station for ξ30']
 }
 
-
 //display balances at start of game
 game.updateBalances();
 
 greetingModal();
 
-//Enable the start button
+//Enable the submit button
 $('body').on("click", game.submit, function() {
 });
 
 //Bring up a form where users can input their names
 function greetingModal() {
   game.start.click(function() {
-  console.log("start")
   game.updateBalances();
   modal.bodyGreeting();
   modal.footerBlank();
@@ -181,7 +187,6 @@ function greetingModal() {
 };
 
 function startGame () {
-  //update the game with the players' name
     game.updateBalances();
   //choose a first player
   var random = Math.random();
@@ -193,11 +198,13 @@ function startGame () {
     console.log("Player 2's turn");
   }
 
-$('#myModal').modal('show');
+//populate the header
+
   modal.headerColor();
   modal.bodyGreetingPage2();
   modal.footerYay()
 
+//Excuse the greeting modal
   $('#yay').on('click', function(evt) {
     // startGame()
     modal.header();
@@ -230,8 +237,10 @@ game.roll.click(function() {
   modal.headerColor();
   modal.header();
   modal.footerNah();
-  modal.bodyEstablishment(); //make est the default message
+  modal.bodyEstablishment();
 
+//If the player has enough money, buy a destination or else buy an establishment.
+//If not enough money and/or establishments not available, end turn.
   if ( game.currentPlayer.balance > (game.currentPlayer.destinationProgress * 4) + 10 )  {
       buyDestinations(game.currentPlayer);
   } else if ( game.countAvailableEstablishments() > 0 ) {
@@ -239,8 +248,8 @@ game.roll.click(function() {
         buyEstablishments(game.currentPlayer);
       } else {
         modal.header();
-        modal.footerOhWell();
         modal.bodyNotEnoughCash();
+        modal.footerOhWell();
         modal.ohClick(); // includes switchTurns
       }
   } else if ( game.countAvailableEstablishments() === 0 ){
@@ -268,12 +277,14 @@ function  switchTurns () {
   game.activeConsole();
 }
 
+//Generate a celebratory modal for the winner
 function winGame () {
   $('#myModal').modal('show');
   modal.headerWin();
   modal.bodyWin();
   modal.footerNah();
 
+//Either way, strip the game board.
   $('#yes').on('click', function(evt) {
     game.reset.click()
   });
@@ -285,13 +296,14 @@ function winGame () {
 //Pay rent to the player on every roll
 payRent = function(player) {
 //Player 1 rent
-  console.log('1 bal before: ' + game.player1.balance + ' ; 2 bal before: ' + game.player2.balance);
   var p1BalBefore = game.player1.balance;
   if ( game.player1.destinationProgress <= game.currentRoll ) {
     game.player1.balance += ( game.currentRoll + 1 ) * (game.countPlayer1OwnedEstablishments () )
   } else {
     game.player1.balance += ( game.currentRoll + 2) * (game.countPlayer1OwnedEstablishments() )
   }
+  //If rent has been paid, make the player's balance flash.
+  var p1BalAfter = game.player1.balance;
   if (p1BalBefore !== p1BalAfter) {
         game.player1.balanceDisplay.fadeIn(250).fadeOut(150).fadeIn(250).fadeOut(150).fadeIn(250);
   }
@@ -301,9 +313,10 @@ payRent = function(player) {
     game.player2.balance += ( game.currentRoll + 1 ) * (game.countPlayer2OwnedEstablishments () )
   } else {
     game.player2.balance += ( game.currentRoll + 2) * (game.countPlayer2OwnedEstablishments() )
-  } console.log('1 bal after : ' + game.player1.balance + ' ; 2 bal after : ' + game.player2.balance);
-    var p1BalAfter = game.player1.balance;
-    var p2BalAfter = game.player2.balance;
+  }
+
+  //If rent has been paid, make the player's balance flash.
+  var p2BalAfter = game.player2.balance;
   if (p2BalBefore !== p2BalAfter) {
           game.player2.balanceDisplay.fadeIn(250).fadeOut(150).fadeIn(250).fadeOut(150).fadeIn(250);
   }
@@ -349,7 +362,7 @@ function buyDestinations(player) {
     })
 }
 
-//Determine which establishment card the user may buy
+//Determine which establishment card the user may buy, and complete the process
 function buyEstablishments(player) {
   $('#yes').on('click', {player: player} ,function(evt) {
     evt.data.player.balance -= (game.currentRoll + 1);
