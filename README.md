@@ -1,5 +1,5 @@
 #Bright Lights, Big Kitty
-####[See the game here] (http://jjkeith.github.io/Project1/)
+####[See the game here] (http://jjkeith.github.io/Bright-Lights-Big-Kitty/)
 
 **Bright Lights, Big Kitty is a cat-themed real estate card game. The goal of Bright Lights, Big Kitty is to collect establishments that will earn rent. Once enough cat coinz(ξ) is collected in rent, players can invest in destinations that will increase their establishments' rent and get them closer to winning the title of Chief Hairballer.**
 
@@ -38,9 +38,11 @@ The idea for Bright Lights, Big Kitty came from my seven-year-old daughter after
 3. Whoever buys the WCAT Television Studio first, wins!
 
 ###Screenshots
-![] (screenshots/screenshot1.jpg)
+
+
+![] (screenshot1.jpg)
 The game at start.
-![] (screenshots/screenshot2.jpg)
+![] (screenshot2.jpg)
 A modal with some properties already purchased.
 
 ###Development
