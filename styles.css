@@ -58,7 +58,6 @@ h4.modal-title {
    color: #333;
  }
 
-
  .btn-block {
      display: block;
      width: 25%;
@@ -68,41 +67,6 @@ h4.modal-title {
  .modal-header {
     background-color: #E1BC29;
  }
-
-
-
- /*************************************/
-
-/*
-  #establishments {
-   position: absolute;
-   top: 175px;
-   left: 250px;
-   margin: 0 auto;
- }
-
-
- #establishments-instrux {
-   position: absolute;
-   top: 215px;
-   left: 150px;
-   margin: 0 auto;
- }
-
-
-#destinations {
-   position: absolute;
-   top: 430px;
-   left: 275px;
-   margin: 0 auto;
- }
-
- #destinations-instrux {
-   position: absolute;
-   top: 470px;
-   left: 235px;
-   margin: 0 auto;
- }*/
 
 h1 {
   letter-spacing: .3em;
@@ -118,11 +82,9 @@ h3 {
   padding: 0;
 }
 
-
 p {
   font-size: 13px;
 }
-
 
 p.num {
   font-size: 22px;
@@ -139,7 +101,7 @@ a[title] {
 }
 
 .popover-title {
-  /*font-family: 'Open Sans', sans-serif;*/
+  font-family: 'Short Stack', cursive;
   font-size: 14px;
   padding: 2px 30px;
   background-color: #E1BC29;
@@ -148,10 +110,15 @@ a[title] {
 }
 
 .popover-content {
+  font-family: 'Short Stack', cursive;
   font-size: 13px;
   padding: 2px 3px;
   font-weight: 400;
   text-align: center;
+}
+
+.padding-below {
+  padding-bottom: 30px;
 }
 
 /*Shared card style*/
@@ -163,6 +130,11 @@ a[title] {
 }
 
 /*Style the front row of cards*/
+.front {
+  margin-top: 15px;
+  margin-left: 15px;
+  position: absolute;
+}
 
 .card.establishment {
   background-color: #4D9DE0;
@@ -172,166 +144,19 @@ a[title] {
   background-color: #7768AE;
 }
 
-/*Position the top row of destination cards*/
-/*
-
-#estA1 {
-  left: 30px;
-  top: 240px
+.pull-up {
+  display: inline-block;
+  vertical-align: top;
 }
-
-
-#estA2 {
-  left: 175px;
-  top: 240px
-}
-
-
-#estA3 {
-  left: 320px;
-  top: 240px
-}
-
-
-#estA4 {
-  left: 465px;
-  top: 240px
-}
-
-
-#estA5 {
-  left: 610px;
-  top: 240px
-}
-
-
-#estA6 {
-  left: 755px;
-  top: 240px
-}
-
-/*
-/*Position the top row of destination cards*/
-
-/*#destA1 {
-  left: 30px;
-  top: 495px
-}
-
-
-#destA2 {
-  left: 175px;
-  top: 495px
-}
-
-
-#destA3 {
-  left: 320px;
-  top: 495px
-}
-
-
-#destA4 {
-  left: 465px;
-  top: 495px
-}
-
-
-#destA5 {
-  left: 610px;
-  top: 495px
-}
-
-
-#destA6 {
-  left: 755px;
-  top: 495px
-}*/
-
 
 /*Style the back rows of cards*/
 
 .card.behind-establishment {
   background-color: #438BC6;
   z-index: -1;
-  }
-
+}
 
 .card.behind-destination {
   background-color: #655893;
-  z-index: -1;}
-
-
-/*Position the back row of establishment cards*/
-
-/*#estB1 {
-  left: 10px;
-  top: 225px
+  z-index: -1;
 }
-
-
-#estB2 {
-  left: 155px;
-  top: 225px
-}
-
-
-#estB3 {
-  left: 300px;
-  top: 225px
-}
-
-
-#estB4 {
-  left: 445px;
-  top: 225px
-}
-
-
-#estB5 {
-  left: 590px;
-  top: 225px
-}
-
-
-#estB6 {
-  left: 735px;
-  top: 225px
-}
-
-
-/*Position the back row of destination cards*/
-/*#destB1 {
-  left: 10px;
-    top: 480px
-}
-
-
-#destB2 {
-  left: 155px;
-  top: 480px
-}
-
-
-#destB3 {
-  left: 300px;
-  top: 480px
-}*/
-
-/*
-#destB4 {
-  left: 445px;
-  top: 480px
-}*/
-
-/*
-#destB5 {
-  left: 590px;
-  top: 480px
-}
-
-
-#destB6 {
-  left: 735px;
-  top: 480px
-}*/
