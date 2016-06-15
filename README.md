@@ -38,9 +38,9 @@ The idea for "Bright Lights, Big Kitty" came from my then six-year-old daughter 
 3. Whoever buys the WCAT Television Studio first, wins!
 
 ###Screenshots
-![](screenshot1.jpg)
+![](screenshot1.png)
 The game at start.
-![](screenshot2.jpg)
+![](screenshot2.png)
 A modal from later in the game.
 
 ###Development
