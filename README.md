@@ -1,10 +1,10 @@
 #Bright Lights, Big Kitty
 ####[See the game here] (http://jjkeith.github.io/Bright-Lights-Big-Kitty/)
 
-**Bright Lights, Big Kitty is a cat-themed real estate card game. The goal of Bright Lights, Big Kitty is to collect establishments that will earn rent. Once enough cat coinz(ξ) is collected in rent, players can invest in destinations that will increase their establishments' rent and get them closer to winning the title of Chief Hairballer.**
+**"Bright Lights, Big Kitty" is a cat-themed real estate card game. The goal of "Bright Lights, Big Kitty" is to collect establishment cards, which will earn the player rent money. Once enough cat coins(ξ) are collected in rent, players can invest in destinations that will increase their establishments' rent and get them closer to winning the title of Mayor Kitty.**
 
 ###Inspiration
-The idea for Bright Lights, Big Kitty came from my seven-year-old daughter after playing Machi Koro, a much more complicated Japanese card game that, sadly, has little to nothing to do with cats. She and I came up with a game that is simpler and is quicker to play... and also has 500% more cats. The original game was made on paper, but her first-grade friends found keeping score too difficult, so I sought to make a Javascript-based version.
+The idea for "Bright Lights, Big Kitty" came from my then six-year-old daughter after playing "Machi Koro," a much more complicated Japanese card game that, sadly, has little to nothing to do with cats. She and I came up with a game that is simpler and is quicker to play... and also has 500% more cats. The original version of this game was made with paper cards, but her first-grade friends found keeping score too difficult, so I sought to make a Javascript-based version.
 
 ###Instructions
 
@@ -23,7 +23,7 @@ The idea for Bright Lights, Big Kitty came from my seven-year-old daughter after
 #####Cat Destinations
 * Players may only have one of each.
 * Cards must be bought in order.
-* When a player obtains a development, the card changes to the player's color, and the player is able to earn 1ξ per establishment owned of the corresponding number.
+* When a player obtains a destination, the card changes to the player's color, and the player is able to earn 1ξ per establishment owned of the corresponding number.
 
 1. Catnip Dispensary - Costs 10ξ, earns 1ξ extra on The Veterinary Offices of Katz & Nuzzle
 2. Tuna Cannery - Costs 15ξ, earns 1ξ extra on the Tuna 'R' Us
@@ -38,12 +38,10 @@ The idea for Bright Lights, Big Kitty came from my seven-year-old daughter after
 3. Whoever buys the WCAT Television Studio first, wins!
 
 ###Screenshots
-
-
-![] (screenshot1.jpg)
+![](screenshot1.jpg)
 The game at start.
-![] (screenshot2.jpg)
-A modal with some properties already purchased.
+![](screenshot2.jpg)
+A modal from later in the game.
 
 ###Development
 My original plan for laying out the screen was to put player info at the bottom of the page as below. However, I switched it around because I felt that having that information at the top was more intuitive.
@@ -51,10 +49,9 @@ My original plan for laying out the screen was to put player info at the bottom 
 ![](Wireframe.png)
 
 ###Technology
-Bright Lights, Big Kitty was created with HTML, CSS, Javascript, jQuery, and Bootstrap. The game board remains static, with colors changing when properties are purchased. Modals guide the player through starting the game and making decisions about property purchasing.
+"Bright Lights, Big Kitty" was created with HTML, CSS, Javascript, jQuery, and Bootstrap. The game board remains static, with colors changing when properties are purchased. Modals guide the player through starting the game and making decisions about purchasing properties.
 
 ###Known Issues
-* The modal covers Player 2's balance so the user can't see when it blinks to indicate that rent has been earned.
 * Players can roll over and over again by escaping out of the modal.
 * Some JS functions are not scalable. Some checker functions should be written recursively.
 * The use of first() and last() limits the game to having only two establishment cards per roll.
@@ -62,10 +59,10 @@ Bright Lights, Big Kitty was created with HTML, CSS, Javascript, jQuery, and Boo
 ###Credits
 * Rules and theme: Beatrix Keith
 * Inspiration: Machi Koro © IDW Games, 2015
-* Color scheme from [Coolors] (https://coolors.co/app/4c9de0-e05353-e0bb28-3ab272-7768ad).
+* Color scheme: [Coolors] (https://coolors.co/app/4c9de0-e05353-e0bb28-3ab272-7768ad).
 
 ##Future Plans
 * Starter cards that are dealt at random and change the occasions or properties upon which rent can be collected
-* Include an option to play against the computer
-* Add key commands that provide input to the modal
-* For each establishment, make four cards available and accordingly raise the prices on the destinations
+* An option to play against the computer
+* Key commands for the modals
+* Four cards available for each establishment and raise the prices on the destinations
