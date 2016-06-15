@@ -1,12 +1,9 @@
-/*\ Hairballerz! by JJ Keith
-|*| (Alternate title Bright Lights, Big Kitty)
+/*\ Bright Lights, Big Kitty
+|*| By JJ Keith
 |*|
-|*| Hairballerz is a cat-themed real estate card game. The goal of Hairballerz is to collect
-|*| establishments that will earn rent. Once enough cat coinz(ξ) is collected in rent, players
-|*| can invest in destinations that will increase their establishments' rent and get them
-|*| closer to winning the title of Chief Hairballer.
+|*| Hairballerz is a cat-themed real estate card game. The goal of Hairballerz |*| is to collect establishments that will earn rent. Once enough cat coinz(ξ) |*| is collected in rent, players can invest in destinations that will increase |*| their establishments' rent and get them closer to winning the title of Chief |*| Hairballer.
 |*|
-|*|
+|*| To do: refactor, simplify 
 \*/
 
 var game = {
